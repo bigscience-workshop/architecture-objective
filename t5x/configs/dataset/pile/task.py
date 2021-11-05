@@ -1,8 +1,7 @@
 import functools
 import seqio
-from t5.data import preprocessors
-
-from t5x.configs.dataset.pile.utils import PileDatasetFnCallable
+from t5.data import preprocessors, utils
+import json as js
 
 vocabulary = seqio.SentencePieceVocabulary(
     'gs://t5-data/vocabs/cc_all.32000/sentencepiece.model', extra_ids=100)
@@ -19,10 +18,24 @@ DEFAULT_OUTPUT_FEATURES = {
         vocabulary=vocabulary, add_eos=True)
 }
 
+DATASET_FOLDER=""
+DATASET_SPLITS_TO_FILEPATTERN={
+    "train": f"{DATASET_FOLDER}/train/*.jsonl",
+    "val": f"{DATASET_FOLDER}/val.jsonl",
+    "test": f"{DATASET_FOLDER}/test.jsonl"
+}
+
+@utils.map_over_dataset
+def extract_text_from_json(json: str):
+    return js.loads(json)["text"]
+
 seqio.TaskRegistry.add(
     'pile_t2t_span_corruption',
-    source=seqio.FunctionDataSource(dataset_fn=PileDatasetFnCallable(), splits=["train", "val"]),
+    source=seqio.TextLineDataSource(
+        split_to_filepattern=DATASET_SPLITS_TO_FILEPATTERN,
+    ),
     preprocessors=[
+        extract_text_from_json,
         functools.partial(
             preprocessors.rekey, key_map={
                 "inputs": None,
@@ -40,8 +53,11 @@ seqio.TaskRegistry.add(
 # Prefix language modeling pretraining task used in Raffel et al., 2019.
 seqio.TaskRegistry.add(
     "pile_t2t_prefix_lm",
-    source=seqio.FunctionDataSource(dataset_fn=PileDatasetFnCallable(), splits=["train", "val"]),
+    source=seqio.TextLineDataSource(
+        split_to_filepattern=DATASET_SPLITS_TO_FILEPATTERN,
+    ),
     preprocessors=[
+        extract_text_from_json,
         functools.partial(
             preprocessors.rekey, key_map={
                 "inputs": None,
