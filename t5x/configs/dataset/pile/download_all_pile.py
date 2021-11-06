@@ -20,7 +20,7 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     local_path = f"{local_base_dir}/{relative_path}"
 
     # Create folder
-    process = subprocess.Popen(["mkdir", "-p", local_path.rsplit("/", 1)])
+    process = subprocess.Popen(["mkdir", "-p", local_path.rsplit("/", 1)[0]])
     process.wait()
 
     # download files
