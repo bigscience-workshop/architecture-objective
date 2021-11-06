@@ -67,7 +67,7 @@ def main():
 
     pool.imap(
         functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
-        [local_path for _, local_paths in pile_urls for local_path in local_paths]
+        [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]
     )
 
 if __name__ == "__main__":
