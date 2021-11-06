@@ -23,9 +23,9 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process = subprocess.Popen(["mkdir", "-p", local_path.rsplit("/", 1)[0]])
     process.wait()
 
-    # download files
-    wget.download(f"{BASE_PILE_URL}/{relative_path}", local_path)
-    process.wait()
+    # # download files
+    # wget.download(f"{BASE_PILE_URL}/{relative_path}", local_path)
+    # process.wait()
 
     # decompress files
     process = subprocess.Popen(['zstd', '-d', local_path],
@@ -34,8 +34,9 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process.wait()
 
     assert local_path.endswith(".zst")
-    local_uncompressed_path = local_path.removesuffix(".zst")
-    gcp_uncompressed_path = f"{gcp_base}/{relative_path.removesuffix('.zst')}"
+    local_uncompressed_path = local_path[:-4]
+    assert relative_path.endswith(".zst")
+    gcp_uncompressed_path = f"{gcp_base}/{relative_path[:-4]}"
 
     # upload to gcp
     process = subprocess.Popen(["gsutil", "cp", local_uncompressed_path, gcp_uncompressed_path])

@@ -4,6 +4,7 @@ import seqio
 from seqio import feature_converters
 from t5.data import preprocessors, utils
 import json as js
+import tensorflow as tf
 
 vocabulary = seqio.SentencePieceVocabulary(
     'gs://t5-data/vocabs/cc_all.32000/sentencepiece.model', extra_ids=100)
@@ -29,7 +30,7 @@ DATASET_SPLITS_TO_FILEPATTERN={
 
 @utils.map_over_dataset
 def extract_text_from_json(json: str):
-    return js.loads(json)["text"]
+    return tf.py_function(js.loads(json)["text"])
 
 seqio.TaskRegistry.add(
     'pile_t2t_span_corruption',
