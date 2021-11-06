@@ -46,6 +46,7 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process = subprocess.Popen(['rm', local_path])
     process.wait()
     process = subprocess.Popen(['rm', local_uncompressed_path])
+    process.wait()
 
 def main():
     args = get_args()
