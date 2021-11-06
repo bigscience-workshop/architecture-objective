@@ -2,7 +2,7 @@ import argparse
 import functools
 import subprocess
 from multiprocessing import Pool
-
+import wget
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -24,9 +24,7 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process.wait()
 
     # download files
-    process = subprocess.Popen(['wget', "-O", local_path , f"{BASE_PILE_URL}/{relative_path}"],
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE)
+    wget.download(f"{BASE_PILE_URL}/{relative_path}", local_path)
     process.wait()
 
     # decompress files
@@ -65,10 +63,12 @@ def main():
 
     pool = Pool(args.procs)
 
-    pool.map(
-        functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
-        [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]
-    )
+    # pool.map(
+    #     functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
+    #     [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]
+    # )
+    for local_path in [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]:
+        download_unztd_and_send_to_gcloud(local_path, local_base_dir=local_base_dir, gcp_base=gcp_base)
 
 if __name__ == "__main__":
     main()
