@@ -33,13 +33,18 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
                                stderr=subprocess.PIPE)
     process.wait()
 
+    assert local_path.endswith(".zst")
+    local_uncompressed_path = local_path.removesuffix(".zst")
+    gcp_uncompressed_path = f"{gcp_base}/{relative_path.removesuffix('.zst')}"
+
     # upload to gcp
-    process = subprocess.Popen(["gsutil", "cp", local_path, f"{gcp_base}/{relative_path}"])
+    process = subprocess.Popen(["gsutil", "cp", local_uncompressed_path, gcp_uncompressed_path])
     process.wait()
 
     # delete file locally
     process = subprocess.Popen(['rm', local_path])
     process.wait()
+    process = subprocess.Popen(['rm', local_uncompressed_path])
 
 def main():
     args = get_args()
