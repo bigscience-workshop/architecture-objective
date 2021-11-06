@@ -34,7 +34,7 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process.wait()
 
     # upload to gcp
-    process = subprocess.Popen(["gsutil", "cp", "-r", local_path, f"{gcp_base}/{relative_path}"])
+    process = subprocess.Popen(["gsutil", "cp", local_path, f"{gcp_base}/{relative_path}"])
     process.wait()
 
     # delete file locally
