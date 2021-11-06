@@ -10,14 +10,14 @@ def get_args():
         "--procs", type=int, required=True, help="Number of processes."
     )
     parser.add_argument(
-        "--base-dir", type=str, required=True, help="Folder to download the document to"
+        "--local-base-dir", type=str, required=True, help="Folder to download the document to"
     )
     return parser.parse_args()
 
 
-def download_and_unztd(relative_path, base_dir):
+def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     BASE_PILE_URL = "https://the-eye.eu/public/AI/pile"
-    local_path = f"{base_dir}/{relative_path}"
+    local_path = f"{local_base_dir}/{relative_path}"
 
     # Create folder
     process = subprocess.Popen(["mkdir", "-p", local_path.rsplit("/", 1)])
@@ -35,6 +35,14 @@ def download_and_unztd(relative_path, base_dir):
                                stderr=subprocess.PIPE)
     process.wait()
 
+    # upload to gcp
+    process = subprocess.Popen(["gsutil", "cp", "-r", local_path, f"{gcp_base}/{relative_path}"])
+    process.wait()
+
+    # delete file locally
+    process = subprocess.Popen(['rm', local_path])
+    process.wait()
+
 def main():
     args = get_args()
 
@@ -49,7 +57,7 @@ def main():
             f"val.jsonl.zst"
         ]
     }
-    base_dir = args.base_dir
+    local_base_dir = args.base_dir
     gcp_base = "gs://bigscience/pile/raw"
 
     process = subprocess.Popen(["mkdir", "-p", base_dir])
@@ -58,12 +66,9 @@ def main():
     pool = Pool(args.procs)
 
     pool.imap(
-        functools.partial(download_and_unztd, base_dir=base_dir),
+        functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
         [local_path for _, local_paths in pile_urls for local_path in local_paths]
     )
-
-    process = subprocess.Popen(["gsutil", "cp", "-r", base_dir, gcp_base])
-    process.wait()
 
 if __name__ == "__main__":
     main()
