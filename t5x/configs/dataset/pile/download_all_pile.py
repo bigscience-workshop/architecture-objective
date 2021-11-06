@@ -23,9 +23,9 @@ def download_unztd_and_send_to_gcloud(relative_path, local_base_dir, gcp_base):
     process = subprocess.Popen(["mkdir", "-p", local_path.rsplit("/", 1)[0]])
     process.wait()
 
-    # # download files
-    # wget.download(f"{BASE_PILE_URL}/{relative_path}", local_path)
-    # process.wait()
+    # download files
+    wget.download(f"{BASE_PILE_URL}/{relative_path}", local_path)
+    process.wait()
 
     # decompress files
     process = subprocess.Popen(['zstd', '-d', local_path],
@@ -68,12 +68,12 @@ def main():
     process = subprocess.Popen(["mkdir", "-p", local_base_dir])
     process.wait()
 
-    pool = Pool(args.procs)
-
+    # pool = Pool(args.procs)
     # pool.map(
     #     functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
     #     [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]
     # )
+
     for local_path in [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]:
         download_unztd_and_send_to_gcloud(local_path, local_base_dir=local_base_dir, gcp_base=gcp_base)
 
