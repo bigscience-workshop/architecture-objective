@@ -57,10 +57,10 @@ def main():
             f"val.jsonl.zst"
         ]
     }
-    local_base_dir = args.base_dir
+    local_base_dir = args.local_base_dir
     gcp_base = "gs://bigscience/pile/raw"
 
-    process = subprocess.Popen(["mkdir", "-p", base_dir])
+    process = subprocess.Popen(["mkdir", "-p", local_base_dir])
     process.wait()
 
     pool = Pool(args.procs)
