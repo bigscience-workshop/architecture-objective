@@ -1,5 +1,7 @@
 import functools
+
 import seqio
+from seqio import feature_converters
 from t5.data import preprocessors, utils
 import json as js
 
@@ -18,7 +20,7 @@ DEFAULT_OUTPUT_FEATURES = {
         vocabulary=vocabulary, add_eos=True)
 }
 
-DATASET_FOLDER=""
+DATASET_FOLDER="gs://bigscience/pile/raw"
 DATASET_SPLITS_TO_FILEPATTERN={
     "train": f"{DATASET_FOLDER}/train/*.jsonl",
     "val": f"{DATASET_FOLDER}/val.jsonl",
@@ -42,7 +44,7 @@ seqio.TaskRegistry.add(
                 "targets": "text"
             }),
         seqio.preprocessors.tokenize,
-        seqio.CacheDatasetPlaceholder(required=True),
+        seqio.CacheDatasetPlaceholder(),
         preprocessors.span_corruption,
         seqio.preprocessors.append_eos_after_trim,
     ],
@@ -64,10 +66,19 @@ seqio.TaskRegistry.add(
                 "targets": "text"
             }),
         seqio.preprocessors.tokenize,
-        seqio.CacheDatasetPlaceholder(required=True),
+        seqio.CacheDatasetPlaceholder(),
         preprocessors.prefix_lm,
         seqio.preprocessors.append_eos_after_trim,
     ],
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[]
 )
+
+if __name__ == "__main__":
+    task_feature_lengths = {"inputs": 7, "targets": 5}
+    converter = feature_converters.EncDecFeatureConverter(pack=True)
+    seqio.get_dataset(
+        "pile_t2t_span_corruption",
+        task_feature_lengths=task_feature_lengths,
+        feature_converter=converter,
+    )
