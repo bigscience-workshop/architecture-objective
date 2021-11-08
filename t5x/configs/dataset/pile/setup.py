@@ -71,7 +71,8 @@ class build(_build):  # pylint: disable=invalid-name
 # worker-startup log.
 CUSTOM_COMMANDS = [
     ['echo', 'Custom command worked!'],
-    ['pip', 'install', 'seqio']
+    ['pip', 'install', 'seqio'],
+    ['pip', 'install', 't5[cache-tasks]']
 ]
 
 
