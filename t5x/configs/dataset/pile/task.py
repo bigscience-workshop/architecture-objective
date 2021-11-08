@@ -1,9 +1,8 @@
 import functools
+import sys
 
 import seqio
-from seqio import feature_converters
 from t5.data import preprocessors, utils
-import json as js
 import tensorflow as tf
 
 vocabulary = seqio.SentencePieceVocabulary(
@@ -29,8 +28,12 @@ DATASET_SPLITS_TO_FILEPATTERN={
 }
 
 @utils.map_over_dataset
-def extract_text_from_json(json: str):
-    return tf.py_function(js.loads(json)["text"])
+def extract_text_from_json_tf(json: str):
+    tf.print(json,output_stream=sys.stdout)
+    output = tf.strings.split(json, '{"text": "', maxsplit=1)[1]
+    output = tf.strings.split(output, '", "meta": {', maxsplit=1)[0]
+    tf.print(output,output_stream=sys.stdout)
+    return output
 
 seqio.TaskRegistry.add(
     'pile_t2t_span_corruption',
@@ -38,7 +41,7 @@ seqio.TaskRegistry.add(
         split_to_filepattern=DATASET_SPLITS_TO_FILEPATTERN,
     ),
     preprocessors=[
-        extract_text_from_json,
+        extract_text_from_json_tf,
         functools.partial(
             preprocessors.rekey, key_map={
                 "inputs": None,
@@ -53,14 +56,13 @@ seqio.TaskRegistry.add(
     metric_fns=[]
 )
 
-# Prefix language modeling pretraining task used in Raffel et al., 2019.
 seqio.TaskRegistry.add(
     "pile_t2t_prefix_lm",
     source=seqio.TextLineDataSource(
         split_to_filepattern=DATASET_SPLITS_TO_FILEPATTERN,
     ),
     preprocessors=[
-        extract_text_from_json,
+        extract_text_from_json_tf,
         functools.partial(
             preprocessors.rekey, key_map={
                 "inputs": None,
@@ -74,12 +76,3 @@ seqio.TaskRegistry.add(
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[]
 )
-
-if __name__ == "__main__":
-    task_feature_lengths = {"inputs": 7, "targets": 5}
-    converter = feature_converters.EncDecFeatureConverter(pack=True)
-    seqio.get_dataset(
-        "pile_t2t_span_corruption",
-        task_feature_lengths=task_feature_lengths,
-        feature_converter=converter,
-    )
