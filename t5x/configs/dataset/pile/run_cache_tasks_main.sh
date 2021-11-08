@@ -13,4 +13,5 @@ seqio_cache_tasks \
  --module_import=$MODULE_IMPORT \
  --tasks=${TASK_NAME} \
  --output_cache_dir=${BUCKET}/cache \
+ --setup_file t5x/configs/dataset/pile/dataflow_setup.py \
  --pipeline_options="--runner=DataflowRunner,--project=$PROJECT,--region=$REGION,--job_name=$JOB_NAME,--staging_location=$BUCKET/binaries,--temp_location=$BUCKET/tmp"
