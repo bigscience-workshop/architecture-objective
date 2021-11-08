@@ -112,7 +112,7 @@ REQUIRED_PACKAGES = [
 ]
 
 setuptools.setup(
-    name='pile',
+    name='cache_pile',
     version='0.0.1',
     description='Cache pile set workflow package.',
     install_requires=REQUIRED_PACKAGES,
