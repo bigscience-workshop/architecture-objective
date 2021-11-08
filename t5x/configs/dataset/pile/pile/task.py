@@ -1,6 +1,4 @@
 import functools
-import sys
-
 import seqio
 from t5.data import preprocessors, utils
 import tensorflow as tf
@@ -29,11 +27,9 @@ DATASET_SPLITS_TO_FILEPATTERN={
 
 @utils.map_over_dataset
 def extract_text_from_json_tf(json: str):
-    tf.print(json,output_stream=sys.stdout)
     output = tf.strings.split(json, '{"text": "', maxsplit=1)[1]
     output = tf.strings.split(output, '", "meta": {', maxsplit=1)[0]
-    tf.print(output,output_stream=sys.stdout)
-    return output
+    return {"text": output}
 
 seqio.TaskRegistry.add(
     'pile_t2t_span_corruption',
