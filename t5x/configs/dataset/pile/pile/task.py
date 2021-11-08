@@ -20,7 +20,9 @@ DEFAULT_OUTPUT_FEATURES = {
 
 DATASET_FOLDER="gs://bigscience/pile/raw"
 DATASET_SPLITS_TO_FILEPATTERN={
-    "train": f"{DATASET_FOLDER}/train/*.jsonl",
+    "train": [
+        f"{DATASET_FOLDER}/train/{i:02d}.jsonl" for i in range(2)
+    ],
     "val": f"{DATASET_FOLDER}/val.jsonl",
     "test": f"{DATASET_FOLDER}/test.jsonl"
 }
