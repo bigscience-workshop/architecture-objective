@@ -2,7 +2,7 @@
 # gcloud auth application-default login
 
 
-MODULE_IMPORT=t5x.configs.dataset.pile.task
+MODULE_IMPORT=pile.task
 TASK_NAME=pile_t2t_span_corruption
 JOB_NAME=pilet2tspancorruption # the name must consist of only the characters [-a-z0-9], starting with a letter and ending with a letter or number
 BUCKET=gs://bigscience/pile/$TASK_NAME # Don't know is cache needs to be task specific or not ...
