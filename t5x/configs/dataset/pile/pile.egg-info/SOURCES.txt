@@ -1,7 +1,0 @@
-setup.py
-pile/__init__.py
-pile.egg-info/PKG-INFO
-pile.egg-info/SOURCES.txt
-pile.egg-info/dependency_links.txt
-pile.egg-info/requires.txt
-pile.egg-info/top_level.txt
