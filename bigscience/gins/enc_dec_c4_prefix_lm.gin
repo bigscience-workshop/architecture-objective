@@ -1,6 +1,7 @@
 from __gin__ import dynamic_registration
 
 from t5x import models
+from t5x import utils
 import seqio
 
 include "bigscience/gins/enc_dec_xxl.gin"
