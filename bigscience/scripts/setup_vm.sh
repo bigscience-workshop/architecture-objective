@@ -19,7 +19,14 @@ git clone https://github.com/google-research/text-to-text-transfer-transformer.g
 pushd text-to-text-transfer-transformer
 pip3 install -e .
 popd
+#rm -rf text-to-text-transfer-transformer
+#git clone https://github.com/thomasw21/text-to-text-transfer-transformer.git
+#pushd text-to-text-transfer-transformer
+#git checkout fix_prefix_lm_obj
+#pip3 install -e .
+#popd
 
+#rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
 git checkout thomas/add_train_script_span_corruption
