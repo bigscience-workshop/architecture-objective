@@ -595,15 +595,10 @@ class Checkpointer(object):
       fp.write(msgpack_bytes)
 
     # Finalize checkpoint directory.
-<<<<<<< HEAD
     if final_dir.startswith('gs://'):
       subprocess.run(['gsutil', '-m', 'mv', tmp_dir, final_dir],
                      stdout=subprocess.DEVNULL,
                      check=True)
-=======
-    if final_dir.startswith("gs://"):
-        subprocess.run(["gsutil", "-m", "mv", tmp_dir, final_dir], stdout=subprocess.DEVNULL, check=True)
->>>>>>> f5eb3ee (Remove some logging and allow subprocess.run to raise error in case of non zero exit)
     else:
       gfile.rename(tmp_dir, final_dir)
     logging.info('Saved checkpoint for step %d to %s', step, final_dir)
