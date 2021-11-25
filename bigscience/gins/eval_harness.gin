@@ -51,7 +51,6 @@ utils.DatasetConfig:
   use_custom_packing_ops = False
   seed = 42
   shuffle = False
-  use_cached = True 
   split = 'infer'
   module = None
   mixture_or_task_name = None
