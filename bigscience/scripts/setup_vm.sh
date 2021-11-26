@@ -40,5 +40,5 @@ sudo rm /usr/local/lib/python3.8/dist-packages/tensorflow/core/kernels/libtfkern
 ##   This is probably linked to `use_custom_packing_ops=True`. Just set it to False and we're good to go
 #pip3 install tensor2tensor
 
-# Needed for profiling to work apparently
-pip3 install tbp-nightly
+## Needed for profiling to work apparently
+#pip3 install tbp-nightly
