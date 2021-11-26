@@ -2,7 +2,7 @@ import functools
 
 import seqio
 from t5.data import preprocessors, get_default_vocabulary
-from t5.data.preprocessors import select_random_chunk, split_tokens_to_targets_length, reduce_concat_tokens
+from t5.data.preprocessors import select_random_chunk, reduce_concat_tokens, split_tokens
 
 from t5x.partitioning import LogicalAxisRules
 
@@ -17,7 +17,7 @@ def full_lm(dataset, sequence_length, output_features):
     ds = select_random_chunk(ds, output_features=output_features, feature_key='targets', max_length=65536)
     ds = seqio.preprocessors.append_eos(ds, output_features)
     ds = reduce_concat_tokens(ds, feature_key='targets', batch_size=128)
-    ds = split_tokens_to_targets_length(ds, output_features=output_features, sequence_length=sequence_length)
+    ds = split_tokens(ds, max_tokens_per_segment=sequence_length['targets'])
     # ds = trim_and_pad_dataset(ds, sequence_length) # I feel this should be interesting, we should use `split_tokens_to_targets_length`
     return ds
 
