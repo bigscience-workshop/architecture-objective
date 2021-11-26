@@ -17,6 +17,8 @@ echo "Using $NAME as name"
 SUBNET=julien-tpusubnet # to be updated to a single subnet at some point
 TPU_NAME=$NAME-tpu
 ZONE=us-central2-b
+#ACCELERATOR_TYPE=v4-8
+#RUNTIME_VERSION=v2-alpha-tpuv4
 ACCELERATOR_TYPE=v4-128
 RUNTIME_VERSION=v2-alpha-tpuv4-pod
 gcloud alpha compute tpus tpu-vm create ${TPU_NAME} --zone ${ZONE} --accelerator-type ${ACCELERATOR_TYPE} --version ${RUNTIME_VERSION} --subnetwork ${SUBNET}
