@@ -29,7 +29,7 @@ popd
 #rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
-git checkout thomas/add_train_script_span_corruption
+git checkout teven/add_lm_adapation
 pip3 install -e .
 popd
 
