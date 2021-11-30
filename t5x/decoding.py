@@ -779,6 +779,7 @@ def beam_search(inputs: jnp.ndarray,
                 num_decodes: int = 4,
                 alpha: float = 0.6,
                 max_decode_len: Optional[int] = None,
+                initial_index: Optional[jnp.ndarray] = None,
                 decode_rng: Optional[jnp.ndarray] = None,
                 cache_offset: int = 0) -> Tuple[jnp.ndarray, jnp.ndarray]:
   """Beam search for transformer machine translation.
