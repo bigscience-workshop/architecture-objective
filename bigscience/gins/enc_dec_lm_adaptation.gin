@@ -28,3 +28,8 @@ models.EncoderDecoderModel.feature_converter_cls = @seqio.PassThroughFeatureConv
 
 MIXTURE_OR_TASK_NAME = "c4_prefix_lm_objective_encoder_decoder_architecture"
 INITIAL_CHECKPOINT_PATH = "gs://bigscience-t5x/enc_dec_c4_span_corruption/checkpoint_30000"
+
+utils.create_learning_rate_scheduler:
+  factors = 'constant * rsqrt_decay'
+  base_learning_rate = 1.0
+  warmup_steps = 10000  # 10k to keep consistent with T5/MTF defaults.
