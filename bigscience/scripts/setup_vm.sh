@@ -29,7 +29,7 @@ popd
 #rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
-git checkout teven/add_lm_adapation
+git checkout teven/add_lm_adaptation
 pip3 install -e .
 popd
 
