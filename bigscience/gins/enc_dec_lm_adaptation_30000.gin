@@ -1,0 +1,5 @@
+from __gin__ import dynamic_registration
+
+include "bigscience/gins/enc_dec_lm_adaptation_base.gin"
+
+INITIAL_CHECKPOINT_PATH = "gs://bigscience-t5x/enc_dec_c4_span_corruption/checkpoint_30000"
