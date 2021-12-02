@@ -24,16 +24,16 @@ train_eval/utils.DatasetConfig:
   use_custom_packing_ops = False
 
 train_script.train:
-  eval_period = 1000
-  stats_period = 200
-  eval_steps = 100
+  eval_period = 15000
+  stats_period = 3000
+  eval_steps = 1500
   random_seed = None
 
 # trainer.Trainer.num_microbatches = 8 # 2048 // 8
 utils.create_learning_rate_scheduler.warmup_steps = 10000
 
 utils.SaveCheckpointConfig:
-  period = 2000  # checkpoint frequency
+  period = 30000  # checkpoint frequency
   keep = None # only keep one checkpoint
 
 partitioning.ModelBasedPjitPartitioner:
