@@ -8,17 +8,17 @@ from t5x import utils
 import task
 
 MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
-TRAIN_STEPS = 32768
+TRAIN_STEPS = 524288
 DROPOUT_RATE = 0.0
 
 train/utils.DatasetConfig:
-  batch_size = 2048
+  batch_size = 128
   use_cached = True
   pack = True
   use_custom_packing_ops = False
 
 train_eval/utils.DatasetConfig:
-  batch_size = 2048
+  batch_size = 128
   use_cached = True
   pack = True
   use_custom_packing_ops = False
@@ -29,7 +29,7 @@ train_script.train:
   eval_steps = 100
   random_seed = None
 
-trainer.Trainer.num_microbatches = 8 # 2048 // 8
+# trainer.Trainer.num_microbatches = 8 # 2048 // 8
 utils.create_learning_rate_scheduler.warmup_steps = 10000
 
 utils.SaveCheckpointConfig:
