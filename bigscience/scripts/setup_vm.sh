@@ -29,6 +29,7 @@ popd
 #rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
+git checkout thomas/test_loss_normalisation
 pip3 install -e .
 popd
 
