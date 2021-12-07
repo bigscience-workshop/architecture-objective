@@ -42,19 +42,19 @@ TaskRegistry.add(
 
 # --- Improve sharding ---
 
-def fully_sharded_logical_axis_rules() -> LogicalAxisRules:
-    """Fully sharded rules for P5X model in terms of logical axes names."""
-    return (
-      ('batch', 'data'),
-      ('vocab', 'model'),
-      ('mlp', 'model'),
-      ('heads', 'model'),
-      ('joined_kv', 'model'),
-      ('kv', None),
-      ('embed', 'model'),
-      ('embed', 'data'),
-      ('relpos_buckets', None),
-      ('length', None),
-      ('layers', None),
-      ('stack', None),
-    )
+# def fully_sharded_logical_axis_rules() -> LogicalAxisRules:
+#     """Fully sharded rules for P5X model in terms of logical axes names."""
+#     return (
+#       ('batch', 'data'),
+#       ('vocab', 'model'),
+#       ('mlp', 'model'),
+#       ('heads', 'model'),
+#       ('joined_kv', 'model'),
+#       ('kv', None),
+#       ('embed', 'model'),
+#       ('embed', 'data'),
+#       ('relpos_buckets', None),
+#       ('length', None),
+#       ('layers', None),
+#       ('stack', None),
+#     )

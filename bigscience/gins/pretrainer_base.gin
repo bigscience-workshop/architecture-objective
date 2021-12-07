@@ -1,0 +1,44 @@
+from __gin__ import dynamic_registration
+
+import __main__ as train_script
+from t5x import models
+from t5x import partitioning
+from t5x import trainer
+from t5x import utils
+import task
+
+MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
+TRAIN_STEPS = 524288
+DROPOUT_RATE = 0.0
+
+train/utils.DatasetConfig:
+  batch_size = 128
+  use_cached = True
+  pack = True
+  use_custom_packing_ops = False
+
+train_eval/utils.DatasetConfig:
+  batch_size = 128
+  use_cached = True
+  pack = True
+  use_custom_packing_ops = False
+
+train_script.train:
+  eval_period = 15000
+  stats_period = 3000
+  eval_steps = 1500
+  random_seed = None
+  infer_eval_dataset_cfg = None # Prevent to run inference evaluation
+
+# trainer.Trainer.num_microbatches = 8 # 2048 // 8
+utils.create_learning_rate_scheduler:
+  factors = 'constant * rsqrt_decay'
+  base_learning_rate = 1.0
+  warmup_steps = 10000
+
+utils.SaveCheckpointConfig:
+  period = 30000  # checkpoint frequency
+  keep = None # only keep one checkpoint
+
+partitioning.ModelBasedPjitPartitioner:
+  model_parallel_submesh = (4,2,1,1)
