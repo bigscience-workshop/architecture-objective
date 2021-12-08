@@ -33,11 +33,13 @@ then
   exit
 fi
 
+GIN_FILE=bigscience/gins/$GIN_FILE
+echo "Running the following config: $GIN_FILE"
 
 python3 ${T5X_DIR}/t5x/train.py \
-  --gin_file="bigscience/gins/$GIN_FILE" \
+  --gin_file="$GIN_FILE" \
   --gin.INITIAL_CHECKPOINT_PATH="'${CHECKPOINT_DIR}'" \
   --gin.MODEL_DIR="'${MODEL_DIR}'" \
   2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
 
-# sh bigscience/scripts/t0_adapt.sh c_dec_c4_full_lm 420000
+# sh bigscience/scripts/t0_adapt.sh c_dec_c4_full_lm_bs_128 420000
