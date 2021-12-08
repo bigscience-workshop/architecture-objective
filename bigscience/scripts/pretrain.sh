@@ -16,3 +16,6 @@ python3 ${T5X_DIR}/t5x/train.py \
   --gin_file="bigscience/gins/$EXPERIMENT_NAME.gin" \
   --gin.MODEL_DIR="'${MODEL_DIR}'" \
   2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
+
+# sh bigscience/scripts/pretrain.sh c_dec_c4_full_lm
+

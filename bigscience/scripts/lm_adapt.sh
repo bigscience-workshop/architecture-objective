@@ -3,7 +3,7 @@ python3 -c "import jax; print(jax.device_count()); print(jax.local_device_count(
 # Model dir to save logs, ckpts, etc. in "gs://model_dir" format.
 ORIGINAL_EXPERIMENT_NAME=$1
 CHECKPOINT_STEP=$2
-EXPERIMENT_NAME=$ORIGINAL_EXPERIMENT_NAME"_t0_adapt_"$CHECKPOINT_STEP
+EXPERIMENT_NAME=$ORIGINAL_EXPERIMENT_NAME"_lm_adapt_"$CHECKPOINT_STEP
 CHECKPOINT_DIR="gs://bigscience-t5x/arch_objective_exps/$ORIGINAL_EXPERIMENT_NAME/checkpoint_$CHECKPOINT_STEP"
 MODEL_DIR="gs://bigscience-t5x/arch_objective_exps/$EXPERIMENT_NAME"
 
@@ -15,17 +15,23 @@ export PYTHONPATH=${T5X_DIR}/bigscience/gins
 LOGS_PATH="/home/thomas/logs"
 mkdir -p $LOGS_PATH
 
+if [[ $ORIGINAL_EXPERIMENT != *span_corruption* ]]
+then
+  echo "Incorrect original experiment name, lm adapt should only be used on \`span_corruption\` checkpoints, got $ORIGINAL_EXPERIMENT_NAME"
+  exit
+fi
+
 if [[ $ORIGINAL_EXPERIMENT = c_dec* ]]
 then
-  GIN_FILE=c_dec_t0_adapt.gin
+  GIN_FILE=c_dec_c4_lm_adapt.gin
 fi
 if [[ $ORIGINAL_EXPERIMENT = nc_dec* ]]
 then
-  GIN_FILE=nc_dec_t0_adapt.gin
+  GIN_FILE=nc_dec_c4_lm_adapt.gin
 fi
 if [[ $ORIGINAL_EXPERIMENT = enc_dec* ]]
 then
-  GIN_FILE=enc_dec_t0_adapt.gin
+  GIN_FILE=enc_dec_c4_lm_adapt.gin
 fi
 if [[ $GIN_FILE = "" ]]
 then
