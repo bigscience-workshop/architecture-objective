@@ -15,15 +15,15 @@ export PYTHONPATH=${T5X_DIR}/bigscience/gins
 LOGS_PATH="/home/thomas/logs"
 mkdir -p $LOGS_PATH
 
-if [[ $ORIGINAL_EXPERIMENT = c_dec* ]]
+if [[ $ORIGINAL_EXPERIMENT_NAME = c_dec* ]]
 then
   GIN_FILE=c_dec_t0_adapt.gin
 fi
-if [[ $ORIGINAL_EXPERIMENT = nc_dec* ]]
+if [[ $ORIGINAL_EXPERIMENT_NAME = nc_dec* ]]
 then
   GIN_FILE=nc_dec_t0_adapt.gin
 fi
-if [[ $ORIGINAL_EXPERIMENT = enc_dec* ]]
+if [[ $ORIGINAL_EXPERIMENT_NAME = enc_dec* ]]
 then
   GIN_FILE=enc_dec_t0_adapt.gin
 fi
