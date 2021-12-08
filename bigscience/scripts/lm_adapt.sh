@@ -40,12 +40,12 @@ then
 fi
 
 GIN_FILE=bigscience/gins/$GIN_FILE
-echo "Running the following config: $GIN_FILE"
+echo "Running the following config: $GIN_FILE" 2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
 
 python3 ${T5X_DIR}/t5x/train.py \
   --gin.INITIAL_CHECKPOINT_PATH="'${CHECKPOINT_DIR}'" \
   --gin_file="$GIN_FILE" \
   --gin.MODEL_DIR="'${MODEL_DIR}'" \
-  2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
+  2>&1 | tee -a $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
 
 # sh bigscience/scripts/lm_adapt.sh c_dec_c4_span_corruption_bs_128 420000
