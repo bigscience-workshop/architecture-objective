@@ -42,4 +42,4 @@ utils.RestoreCheckpointConfig:
   strict = False
 
 partitioning.ModelBasedPjitPartitioner:
-  model_parallel_submesh = (4,2,1,1)
+  model_parallel_submesh = (4,1,1,1)
