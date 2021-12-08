@@ -15,7 +15,7 @@ export PYTHONPATH=${T5X_DIR}/bigscience/gins
 LOGS_PATH="/home/thomas/logs"
 mkdir -p $LOGS_PATH
 
-if [[ ORIGINAL_EXPERIMENT_NAME != *span_corruption* ]]
+if [[ $ORIGINAL_EXPERIMENT_NAME != *span_corruption* ]]
 then
   echo "Incorrect original experiment name, lm adapt should only be used on \`span_corruption\` checkpoints, got $ORIGINAL_EXPERIMENT_NAME"
   exit
