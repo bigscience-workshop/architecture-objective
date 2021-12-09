@@ -8,7 +8,7 @@ from t5x import utils
 import task
 
 MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
-TRAIN_STEPS = 80000
+TRAIN_STEPS = 604288 # 524288 (pretrain) + 80000 (finetune)
 DROPOUT_RATE = 0.1 # TODO: Check this value
 
 train/utils.DatasetConfig:

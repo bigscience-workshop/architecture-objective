@@ -7,7 +7,10 @@ from t5.data.preprocessors import select_random_chunk, reduce_concat_tokens, spl
 from t5x.partitioning import LogicalAxisRules
 
 # --- Seqio ---
-seqio.add_global_cache_dirs(['gs://bigscience-t5x/seqio_cached_tasks'])
+seqio.add_global_cache_dirs([
+    'gs://bigscience-t5x/seqio_cached_tasks',
+    'gs://bigscience-t5x/seqio_cached_tasks/t0-adapt'
+])
 
 TaskRegistry = seqio.TaskRegistry
 
