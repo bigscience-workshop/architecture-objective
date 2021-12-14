@@ -46,5 +46,7 @@ def main():
     # print(tf.shape(first_element["decoder_positions"]))
     print(tf.where(first_element["decoder_target_tokens"] == 32000))
     print(tf.where(first_element["decoder_input_tokens"] == 32000))
+    print(ds.element_spec)
+
 if __name__ == "__main__":
     main()
