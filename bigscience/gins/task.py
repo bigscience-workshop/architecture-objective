@@ -92,6 +92,8 @@ def pack_prefix_lm_decoder_only(ds,
                 ],
                 axis=0
             )
+            # This has to be specified otherwise dataset tensor spec assigns None in shape.
+            decoder_target_tokens = tf.reshape(decoder_target_tokens, (packed_length,))
         else:
             decoder_target_tokens = example['targets']
 
