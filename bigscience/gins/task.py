@@ -65,11 +65,11 @@ def pack_prefix_lm_decoder_only(ds,
     packed_length = sequence_length["decoder_input_tokens"]
     assert packed_length % 2 == 0
     # "targets" is a special key
-    add_eoi = output_features["decoder_input_tokens"].add_eoi
+    add_bot = output_features["decoder_input_tokens"].add_bot
 
-    assert all(l == packed_length for key, l in sequence_length.items() if (not add_eoi) or key != "targets")
-    assert all(l.add_eoi == add_eoi for key, l in output_features.items() if key != "targets")
-    if add_eoi:
+    assert all(l == packed_length for key, l in sequence_length.items() if (not add_bot) or key != "targets")
+    assert all(l.add_bot == add_bot for key, l in output_features.items() if key != "targets")
+    if add_bot:
         assert sequence_length["targets"] == packed_length - 1
     else:
         assert sequence_length["targets"] == packed_length
@@ -79,10 +79,10 @@ def pack_prefix_lm_decoder_only(ds,
         split_point = tf.random.stateless_uniform((),
                                                   minval=1,
                                                   # Adding an extra token costs a bit.
-                                                  maxval=packed_length if output_features["decoder_input_tokens"].add_eoi else packed_length - 1,
+                                                  maxval=packed_length if output_features["decoder_input_tokens"].add_bot else packed_length - 1,
                                                   seed=seed,
                                                   dtype=tf.int32)
-        if output_features["decoder_input_tokens"].add_eoi:
+        if output_features["decoder_input_tokens"].add_bot:
             decoder_target_tokens = tf.concat(
                 [
                     example['targets'][:split_point - 1],
