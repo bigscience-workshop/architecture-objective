@@ -84,11 +84,11 @@ def pack_prefix_lm_decoder_only(ds,
                                                   dtype=tf.int32)
         if output_features["decoder_input_tokens"].add_bot:
             decoder_target_tokens = tf.ones(
-                (tf.shape(example['targets'])[0] + 1), example['targets'].dtype
+                (tf.shape(example['targets'])[0] + 1,), example['targets'].dtype
             )
-            decoder_target_tokens[:split_point-1].assign(example['targets'][:split_point - 1])
-            decoder_target_tokens[split_point].assing(BOT_ID)
-            decoder_target_tokens[split_point:].assign(example['targets'][split_point - 1 :])
+            decoder_target_tokens[:split_point-1] = example['targets'][:split_point - 1]
+            decoder_target_tokens[split_point-1] = BOT_ID
+            decoder_target_tokens[split_point:] = example['targets'][split_point - 1 :]
             # decoder_target_tokens = tf.concat(
             #     [
             #         example['targets'][:split_point - 1],
