@@ -73,8 +73,27 @@ T5X_T0_EVAL = {
     "story_cloze_2016_Story_Continuation_and_Options",
 
     # ANLI
-    "paws_labeled_final_PAWS_ANLI_GPT3",
-    "paws_labeled_final_PAWS_ANLI_GPT3_no_label",
+    *[
+        task
+        for anli_round in ["r1", "r2", "r3"]
+        for task in [
+            f"anli_GPT_3_style_{anli_round}",
+            f"anli_MNLI_crowdsource_{anli_round}",
+            f"anli_always_sometimes_never_{anli_round}",
+            f"anli_based_on_the_previous_passage_{anli_round}",
+            f"anli_can_we_infer_{anli_round}",
+            f"anli_claim_true_false_inconclusive_{anli_round}",
+            f"anli_consider_always_sometimes_never_{anli_round}",
+            f"anli_does_it_follow_that_{anli_round}",
+            f"anli_does_this_imply_{anli_round}",
+            f"anli_guaranteed_true_{anli_round}",
+            f"anli_guaranteed_possible_impossible_{anli_round}",
+            f"anli_justified_in_saying_{anli_round}",
+            f"anli_must_be_true_{anli_round}",
+            f"anli_should_assume_{anli_round}",
+            f"anli_take_the_following_as_truth_{anli_round}",
+        ]
+    ],
 
     # CB
     "super_glue_cb_GPT_3_style",
