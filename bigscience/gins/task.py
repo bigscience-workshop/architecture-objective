@@ -90,7 +90,7 @@ def pack_prefix_lm_decoder_only(ds,
                     [BOT_ID],
                     example['targets'][split_point - 1:],
                 ],
-                axis=-1
+                axis=0
             )
         else:
             decoder_target_tokens = example['targets']
