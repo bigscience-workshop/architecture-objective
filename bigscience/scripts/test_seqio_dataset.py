@@ -27,7 +27,7 @@ def main():
         ),
         0,
         1,
-        seqio.PassThroughFeatureConverter,
+        seqio.PassThroughFeatureConverter(),
     )
     first_element = next(iter(ds))
     print(first_element)
