@@ -87,7 +87,7 @@ def pack_prefix_lm_decoder_only(ds,
                 [
                     example['targets'][:split_point - 1],
                     # bot will be the same as _<extra_id_99>. Not ideal, but the tokenizer doesn't have `bos` right now.
-                    BOT_ID,
+                    tf.constant([BOT_ID]),
                     example['targets'][split_point - 1:],
                 ],
                 axis=-1
