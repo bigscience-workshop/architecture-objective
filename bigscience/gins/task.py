@@ -125,14 +125,6 @@ T5X_T0_EVAL = {
     "super_glue_rte_should_assume",
 
     # WSC
-    "winograd_wsc_wsc273_GPT_3_Style",
-    "winograd_wsc_wsc273_Who_or_what_is_are",
-    "winograd_wsc_wsc273_by_p_they_mean",
-    "winograd_wsc_wsc273_does_p_stand_for",
-    "winograd_wsc_wsc273_does_the_pronoun_refer_to",
-    "winograd_wsc_wsc273_p_is_are_r",
-    "winograd_wsc_wsc273_replaced_with",
-    "winograd_wsc_wsc273_the_pronoun_refers_to",
     "super_glue_wsc.fixed_GPT_3_Style",
     "super_glue_wsc.fixed_I_think_they_mean",
     "super_glue_wsc.fixed_Who_or_what_is_are",
