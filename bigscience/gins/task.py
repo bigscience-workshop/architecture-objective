@@ -79,10 +79,10 @@ def pack_prefix_lm_decoder_only(ds,
         split_point = tf.random.stateless_uniform((),
                                                   minval=1,
                                                   # Adding an extra token costs a bit.
-                                                  maxval=packed_length if output_features["decoder_input_tokens"].add_bot else packed_length - 1,
+                                                  maxval=packed_length if add_bot else packed_length - 1,
                                                   seed=seed,
                                                   dtype=tf.int32)
-        if output_features["decoder_input_tokens"].add_bot:
+        if add_bot:
             decoder_target_tokens = tf.concat(
                 [
                     example['targets'][:split_point - 1],
