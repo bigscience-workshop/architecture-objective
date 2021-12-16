@@ -142,11 +142,6 @@ T5X_T0_EVAL = {
     "winogrande_winogrande_xl_fill_in_the_blank",
     "winogrande_winogrande_xl_stand_for",
     "winogrande_winogrande_xl_underscore_refer_to",
-    "winogrande_winogrande_debiased_Replace",
-    "winogrande_winogrande_debiased_does_underscore_refer_to",
-    "winogrande_winogrande_debiased_fill_in_the_blank",
-    "winogrande_winogrande_debiased_stand_for",
-    "winogrande_winogrande_debiased_underscore_refer_to",
 
     # WiC
     "super_glue_wic_GPT_3_prompt",
