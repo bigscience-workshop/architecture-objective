@@ -1,14 +1,22 @@
 diff --git a/promptsource/seqio_tasks/tasks.py b/promptsource/seqio_tasks/tasks.py
-index 6b39719..7468214 100644
+index 6b39719..6004aa7 100644
 --- a/promptsource/seqio_tasks/tasks.py
 +++ b/promptsource/seqio_tasks/tasks.py
-@@ -59,7 +59,9 @@ def maybe_get_class_id_postprocessor(template):
+@@ -12,6 +12,7 @@ from t5.evaluation import metrics as mt
+ 
+ import promptsource.templates
+ from promptsource.seqio_tasks import utils
++from promptsource.utils import get_dataset_data_dir
+ 
+ 
+ GET_METRICS = {
+@@ -59,7 +60,9 @@ def maybe_get_class_id_postprocessor(template):
  def get_tf_dataset(split, shuffle_files, seed, dataset_name, subset_name, template, split_mapping):
      # HF datasets does not support file-level shuffling
      del shuffle_files, seed
 -    dataset = datasets.load_dataset(dataset_name, subset_name)
 +
-+    data_dir = utils.get_dataset_data_dir(dataset_name, subset_name)
++    data_dir = get_dataset_data_dir(dataset_name, subset_name)
 +    dataset = datasets.load_dataset(dataset_name, subset_name, data_dir=data_dir)
      dataset = dataset[split_mapping[split]]
      dataset = utils.apply_template(dataset, template)
