@@ -19,6 +19,7 @@ import __main__ as eval_script
 from t5x import partitioning
 from t5x import utils
 
+import task # Needed to define the task `t5x_t0_eval`
 
 # Must be overridden
 MIXTURE_OR_TASK_NAME = "t5x_t0_eval"
