@@ -8,7 +8,7 @@ then
   echo "I don't know how much T0 adaptation one has to do, so I don't know the correct checkpoint"
   exit 1
 else
-  CHECKPOINT_STEP=32768
+  CHECKPOINT_STEP=524288
 fi
 
 EXPERIMENT_NAME=$ORIGINAL_EXPERIMENT_NAME"_t0_eval_"$CHECKPOINT_STEP
@@ -41,10 +41,9 @@ then
   exit
 fi
 
-
 python3 ${T5X_DIR}/t5x/eval.py \
   --gin_file="$MODEL_GIN_FILE" \
   --gin_file="bigscience/gins/eval_t0.gin" \
   --gin.CHECKPOINT_PATH="'$CHECKPOINT_DIR'" \
-  --gin.OUTPUT_DIR="'/home/thomas/arch_objective_exps_v2/$EXPERIMENT_NAME'" \
+  --gin.OUTPUT_DIR="'/home/thomas/arch_objective_exps/$EXPERIMENT_NAME'" \
   2>&1 | tee $LOGS_PATH/t0_eval_$EXPERIMENT_NAME.txt
