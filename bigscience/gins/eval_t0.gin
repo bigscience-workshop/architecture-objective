@@ -48,7 +48,7 @@ utils.DatasetConfig:
   split = 'test'
   batch_size = 64
   shuffle = False
-  seed = 42
+  seed = None
   use_cached = False
   pack = False
   use_custom_packing_ops = False
