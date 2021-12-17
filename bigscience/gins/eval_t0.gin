@@ -37,7 +37,9 @@ eval_script.evaluate:
   restore_checkpoint_cfg = @utils.RestoreCheckpointConfig()
   output_dir = %EVAL_OUTPUT_DIR
 
-partitioning.ModelBasedPjitPartitioner.model_parallel_submesh = (2,1,1,1)
+partitioning.ModelBasedPjitPartitioner:
+  num_partitions = 2 # Dummy value as we use model_parallel_submesh
+  model_parallel_submesh = (2,1,1,1)
 
 utils.DatasetConfig:
   mixture_or_task_name = %MIXTURE_OR_TASK_NAME
