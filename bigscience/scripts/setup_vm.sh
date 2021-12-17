@@ -38,6 +38,11 @@ pushd t5x
 pip3 install -e .
 popd
 
+# Apply promptsource patch
+pushd promptsource
+git apply ~/code/t5x/bigscience/scripts/promptsource.patch
+popd
+
 # TODO: figure if this is actually important
 sudo rm /usr/local/lib/python3.8/dist-packages/tensorflow/core/kernels/libtfkernel_sobol_op.so
 
