@@ -40,6 +40,8 @@ then
   exit
 fi
 
+MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
+
 python3 ${T5X_DIR}/t5x/eval.py \
   --gin_file="$MODEL_GIN_FILE" \
   --gin_file="bigscience/gins/eval_t0.gin" \
