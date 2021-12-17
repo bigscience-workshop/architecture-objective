@@ -3,7 +3,7 @@ index 6b39719..4e18f8d 100644
 --- a/promptsource/seqio_tasks/tasks.py
 +++ b/promptsource/seqio_tasks/tasks.py
 @@ -86,7 +86,6 @@ def add_task(dataset_name, subset_name, template_name, task_name=None, split_map
-
+ 
      dataset_fn = functools.partial(
          get_tf_dataset,
 -        seed=None,
