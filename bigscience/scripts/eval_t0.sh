@@ -5,8 +5,7 @@ ORIGINAL_EXPERIMENT_NAME=$1
 
 if [[ $ORIGINAL_EXPERIMENT_NAME == *t0_adapt* ]]
 then
-  echo "I don't know how much T0 adaptation one has to do, so I don't know the correct checkpoint"
-  exit 1
+  CHECKPOINT_STEP=604288
 else
   CHECKPOINT_STEP=524288
 fi
@@ -35,7 +34,7 @@ if [[ $ORIGINAL_EXPERIMENT_NAME == enc_dec* ]]
 then
   MODEL_GIN_FILE=enc_dec_xxl.gin
 fi
-if [[ $GIN_FILE == "" ]]
+if [[ $MODEL_GIN_FILE == "" ]]
 then
   echo "Incorrect experiment name $ORIGINAL_EXPERIMENT_NAME, does not start with c_dec/nc_dec/enc_dec"
   exit
