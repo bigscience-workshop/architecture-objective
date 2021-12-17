@@ -22,10 +22,10 @@ index 6b39719..6004aa7 100644
      dataset = utils.apply_template(dataset, template)
      return utils.hf_dataset_to_tf_dataset(dataset)
 diff --git a/promptsource/utils.py b/promptsource/utils.py
-index 5817b35..23e13c4 100644
+index 5817b35..d8b560c 100644
 --- a/promptsource/utils.py
 +++ b/promptsource/utils.py
-@@ -49,7 +49,24 @@ def get_dataset(path, conf=None):
+@@ -49,7 +49,23 @@ def get_dataset(path, conf=None):
          builder_instance.download_and_prepare()
          return builder_instance.as_dataset()
      else:
@@ -40,8 +40,7 @@ index 5817b35..23e13c4 100644
 +}
 +def get_dataset_data_dir(dataset_name, subset_name):
 +    if dataset_name in MANUALLY_DOWNLOADED_DATASETS:
-+        subset_name = str(subset_name)
-+        if subset_name in MANUALLY_DOWNLOADED_DATASETS:
++        if subset_name in MANUALLY_DOWNLOADED_DATASETS[dataset_name]:
 +            data_dir = MANUALLY_DOWNLOADED_DATASETS[dataset_name][subset_name]
 +        else:
 +            raise ValueError(f"Unknown subset {subset_name} for dataset {dataset_name}")
