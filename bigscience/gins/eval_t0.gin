@@ -56,4 +56,4 @@ utils.DatasetConfig:
 utils.RestoreCheckpointConfig:
   path = %CHECKPOINT_PATH
   mode = 'specific'
-  dtype = 'float16'
+  dtype = 'float32'
