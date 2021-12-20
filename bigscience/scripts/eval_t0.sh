@@ -42,7 +42,7 @@ fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
 EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps/$EXPERIMENT_NAME
-mkdir -p $(dirname EVAL_OUTPUT_DIR)
+mkdir -p $(dirname $EVAL_OUTPUT_DIR)
 
 # We use offline as loading seqio can be quite long.
 HF_DATASETS_OFFLINE=1 python3 ${T5X_DIR}/t5x/eval.py \
