@@ -42,7 +42,8 @@ fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
 
-python3 ${T5X_DIR}/t5x/eval.py \
+# We use offline as loading seqio can be quite long.
+HF_DATASETS_OFFLINE=1 python3 ${T5X_DIR}/t5x/eval.py \
   --gin_file="$MODEL_GIN_FILE" \
   --gin_file="bigscience/gins/eval_t0.gin" \
   --gin.CHECKPOINT_PATH="'$CHECKPOINT_DIR'" \
