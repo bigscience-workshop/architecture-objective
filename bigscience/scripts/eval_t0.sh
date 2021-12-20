@@ -41,11 +41,13 @@ then
 fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
+EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps/$EXPERIMENT_NAME
+mkdir -p $(dirname EVAL_OUTPUT_DIR)
 
 # We use offline as loading seqio can be quite long.
 HF_DATASETS_OFFLINE=1 python3 ${T5X_DIR}/t5x/eval.py \
   --gin_file="$MODEL_GIN_FILE" \
   --gin_file="bigscience/gins/eval_t0.gin" \
   --gin.CHECKPOINT_PATH="'$CHECKPOINT_DIR'" \
-  --gin.EVAL_OUTPUT_DIR="'/home/thomas/arch_objective_exps/$EXPERIMENT_NAME'" \
+  --gin.EVAL_OUTPUT_DIR="$EVAL_OUTPUT_DIR" \
   2>&1 | tee $LOGS_PATH/t0_eval_$EXPERIMENT_NAME.txt
