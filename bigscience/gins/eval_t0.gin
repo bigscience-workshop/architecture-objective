@@ -49,7 +49,7 @@ utils.DatasetConfig:
   batch_size = 256
   shuffle = False
   seed = None
-  use_cached = False
+  use_cached = True
   pack = False
   use_custom_packing_ops = False
   module = %MIXTURE_OR_TASK_MODULE
