@@ -142,7 +142,7 @@ def evaluate(*,
         score_fn=functools.partial(score_fn, train_state=train_state))
 
     all_metrics = all_metrics.result()
-    print(json.dumps(all_metrics, indent=2)) # Ensure metrics are finished being computed.
+    logging.info(f"Results:\n{json.dumps(all_metrics, indent=2)}") # Ensure metrics are finished being computed.
     results_path = f"{output_dir}/results.json"
     with tf.io.gfile.GFile(f"{results_path}.tmp", "w") as f:
         f.write(json.dumps(all_metrics, indent= 2))
