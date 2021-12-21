@@ -136,7 +136,7 @@ def evaluate(*,
         step=int(train_state.step),
         predict_fn=functools.partial(predict_fn, train_state=train_state),
         score_fn=functools.partial(score_fn, train_state=train_state))
-    all_metrics.result()  # Ensure metrics are finished being computed.
+    print(all_metrics.result())  # Ensure metrics are finished being computed.
     # Wait until computations are done before continuing.
     multihost_utils.sync_devices(f'step_{train_state.step}:complete')
 
