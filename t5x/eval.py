@@ -78,6 +78,8 @@ def evaluate(*,
   # SeqIO (inference-based) evaluation setup
   # ----------------------------------------------------------------------------
   # Init evaluator to set up cached datasets
+  log_dir = os.path.join(output_dir, 'inference_eval')
+  os.makedirs(log_dir, exist_ok=True)
   evaluator = inference_evaluator_cls(
       mixture_or_task_name=dataset_cfg.mixture_or_task_name,
       feature_converter=model.FEATURE_CONVERTER_CLS(pack=False),  # pytype:disable=not-instantiable
@@ -85,7 +87,7 @@ def evaluate(*,
       use_cached=dataset_cfg.use_cached,
       seed=dataset_cfg.seed,
       sequence_length=dataset_cfg.task_feature_lengths,
-      log_dir=os.path.join(output_dir, 'inference_eval'))
+      log_dir=log_dir)
   if not evaluator.eval_tasks:
     raise ValueError(
         f"'{dataset_cfg.mixture_or_task_name}' has no metrics for evaluation.")
