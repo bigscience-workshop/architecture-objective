@@ -19,6 +19,8 @@ import __main__ as eval_script
 from t5x import partitioning
 from t5x import utils
 
+import seqio
+from seqio import loggers
 import task # Needed to define the task `t5x_t0_eval`
 
 # Must be overridden
@@ -37,6 +39,9 @@ eval_script.evaluate:
   partitioner = @partitioning.ModelBasedPjitPartitioner()
   restore_checkpoint_cfg = @utils.RestoreCheckpointConfig()
   output_dir = %EVAL_OUTPUT_DIR
+  inference_evaluator_cls = @seqio.Evaluator
+
+seqio.Evaluator.logger_cls = [@loggers.JSONLogger]
 
 partitioning.ModelBasedPjitPartitioner:
   num_partitions = 2 # Dummy value as we use model_parallel_submesh
