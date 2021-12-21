@@ -148,9 +148,6 @@ def evaluate(*,
         f.write(json.dumps(all_metrics, indent= 2))
         f.write("\n")
     tf.io.gfile.rename(f"{results_path}.tmp", results_path, overwrite=True)
-
-    with open(f"{output_dir}/results.json", "w") as fo:
-        json.dump(all_metrics, fo, indent=2)
     # Wait until computations are done before continuing.
     multihost_utils.sync_devices(f'step_{train_state.step}:complete')
 
