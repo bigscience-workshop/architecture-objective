@@ -11,8 +11,7 @@ else
 fi
 
 EXPERIMENT_NAME=$ORIGINAL_EXPERIMENT_NAME"_t0_eval_"$CHECKPOINT_STEP
-CHECKPOINT_DIR="gs://bigscience-t5x/arch_objective_exps/$ORIGINAL_EXPERIMENT_NAME/checkpoint_$CHECKPOINT_STEP"
-#MODEL_DIR="gs://bigscience-t5x/arch_objective_exps/$EXPERIMENT_NAME"
+CHECKPOINT_DIR="gs://bigscience-t5x/arch_objective_exps_v2/$ORIGINAL_EXPERIMENT_NAME/checkpoint_$CHECKPOINT_STEP"
 
 # directory where the T5X repo is cloned.
 T5X_DIR="/home/thomas/code/t5x"
@@ -41,7 +40,7 @@ then
 fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
-EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps/$EXPERIMENT_NAME
+EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps_v2/$EXPERIMENT_NAME
 mkdir -p $(dirname $EVAL_OUTPUT_DIR)
 
 # We use offline as loading seqio can be quite long.
