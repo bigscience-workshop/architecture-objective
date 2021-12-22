@@ -7,7 +7,9 @@ JOB_NAME=mt0oscar # the name must consist of only the characters [-a-z0-9], star
 BUCKET=gs://bigscience-t5x # Don't know is cache needs to be task specific or not ...
 PROJECT=bigscience
 REGION=us-central2 # TODO: Check if we can have a generic us region
-NUM_WORKERS=32 # TODO: We might need a log more than this
+NUM_WORKERS=1000 # TODO: We might need a log more than this
+
+# TODO: One thing we need to figure out is how does it handle HF datasets cache. If all workers need to download it, it's a big no no.
 
 seqio_cache_tasks \
  --module_import=$MODULE_IMPORT \
