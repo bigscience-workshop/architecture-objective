@@ -23,7 +23,7 @@ class HuggingFaceDatasetsSource(seqio.DataSource):
           dataset_name: HF dataset name.
           subset_name: HF dataset subset.
           num_shards: The number of shards, this is useful when processing large files in parallel.
-          caching_permitted: indicates whether this data source may be cached.
+          caching_permitted: indicates whether this data source may be cached by seqio.
             Default True.
         """
         self._dataset_fn = dataset_name
