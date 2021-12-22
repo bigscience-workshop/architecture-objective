@@ -81,7 +81,8 @@ def evaluate(*,
   # ----------------------------------------------------------------------------
   # Init evaluator to set up cached datasets
   log_dir = os.path.join(output_dir, 'inference_eval')
-  os.makedirs(log_dir, exist_ok=True)
+  if not log_dir.startswith("gs://"):
+    os.makedirs(log_dir, exist_ok=True)
   evaluator = inference_evaluator_cls(
       mixture_or_task_name=dataset_cfg.mixture_or_task_name,
       feature_converter=model.FEATURE_CONVERTER_CLS(pack=False),  # pytype:disable=not-instantiable

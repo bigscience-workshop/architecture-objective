@@ -41,7 +41,7 @@ eval_script.evaluate:
   output_dir = %EVAL_OUTPUT_DIR
   inference_evaluator_cls = @seqio.Evaluator
 
-seqio.Evaluator.logger_cls = [@loggers.JSONLogger]
+# seqio.Evaluator.logger_cls = [@loggers.JSONLogger]
 
 partitioning.ModelBasedPjitPartitioner:
   num_partitions = 2 # Dummy value as we use model_parallel_submesh

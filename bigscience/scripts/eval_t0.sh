@@ -40,7 +40,8 @@ then
 fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
-EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps_v2/$EXPERIMENT_NAME
+# EVAL_OUTPUT_DIR=/home/thomas/arch_objective_exps_v2/$EXPERIMENT_NAME
+EVAL_OUTPUT_DIR="gs://bigscience-t5x/arch_objective_exps_v2/t0_eval/$EXPERIMENT_NAME"
 mkdir -p $(dirname $EVAL_OUTPUT_DIR)
 
 # We use offline as loading seqio can be quite long.
