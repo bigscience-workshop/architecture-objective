@@ -1,6 +1,7 @@
 from __gin__ import dynamic_registration
 
 from t5x import models
+from t5x import trainer
 from t5x import utils
 import seqio
 
@@ -21,9 +22,12 @@ TASK_FEATURE_LENGTHS = {
 }
 
 # ----- This should be reduced by two because we have fancy packing
-train/utils.DatasetConfig.batch_size = 64 # BATCH_SIZE / 2
-train_eval/utils.DatasetConfig.batch_size = 64 # BATCH_SIZE /2
+train/utils.DatasetConfig.batch_size = 1024 # BATCH_SIZE / 2
+train_eval/utils.DatasetConfig.batch_size = 1024 # BATCH_SIZE /2
 
 models.EncoderDecoderModel.feature_converter_cls = @seqio.PassThroughFeatureConverter
 
 MIXTURE_OR_TASK_NAME = "c4_prefix_lm_objective_encoder_decoder_architecture"
+
+trainer.Trainer.num_microbatches = 64
+

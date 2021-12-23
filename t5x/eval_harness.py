@@ -271,10 +271,13 @@ def eval_task(active_tasks, output_path, create_task_func, infer_func):
   adaptor = EvalHarnessAdaptor()
   
   results = evaluator.evaluate(adaptor, tasks.get_task_dict(active_tasks), False, 0, None)
-  dumped = json.dumps(results, indent=2)
-  print(dumped)
-  with open(output_path, 'w') as outfile:
-    json.dump(results, outfile)
+
+  results_dump = json.dumps(results, indent=2)
+  logging.info(f"Results:\n{results_dump}")  # Ensure metrics are finished being computed.
+  with tf.io.gfile.GFile(f"{output_path}.tmp", "w") as f:
+      f.write(results_dump)
+      f.write("\n")
+  tf.io.gfile.rename(f"{output_path}.tmp", output_path, overwrite=True)
 
 if __name__ == '__main__':
   # pylint:disable=g-import-not-at-top
