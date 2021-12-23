@@ -10,7 +10,7 @@ else
   CHECKPOINT_STEP=32768
 fi
 
-PYTHONPATH=$(pwd)/bigscience/gins python3 $(pwd)/t5x/eval_harness.py \
+HF_DATASETS_OFFLINE=1 PYTHONPATH=$(pwd)/bigscience/gins python3 $(pwd)/t5x/eval_harness.py \
    --gin_file_="bigscience/gins/c_dec_xxl.gin" \
    --gin_file_="bigscience/gins/eval_harness.gin" \
    --gin.INFER_OUTPUT_DIR="'.'"  \

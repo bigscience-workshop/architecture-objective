@@ -42,7 +42,7 @@ fi
 GIN_FILE=bigscience/gins/$GIN_FILE
 echo "Running the following config: $GIN_FILE" 2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
 
-python3 ${T5X_DIR}/t5x/train.py \
+HF_DATASETS_OFFLINE=1 python3 ${T5X_DIR}/t5x/train.py \
   --gin.INITIAL_CHECKPOINT_PATH="'${CHECKPOINT_DIR}'" \
   --gin_file="$GIN_FILE" \
   --gin.MODEL_DIR="'${MODEL_DIR}'" \

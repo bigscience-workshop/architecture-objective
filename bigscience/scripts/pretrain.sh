@@ -12,7 +12,7 @@ export PYTHONPATH=${T5X_DIR}/bigscience/gins
 LOGS_PATH="/home/thomas/logs"
 mkdir -p $LOGS_PATH
 
-python3 ${T5X_DIR}/t5x/train.py \
+HF_DATASETS_OFFLINE=1 python3 ${T5X_DIR}/t5x/train.py \
   --gin_file="bigscience/gins/$EXPERIMENT_NAME.gin" \
   --gin.MODEL_DIR="'${MODEL_DIR}'" \
   2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
