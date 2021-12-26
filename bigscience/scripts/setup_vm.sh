@@ -36,6 +36,7 @@ popd
 #rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
+git checkout thomas/prefix_lm_add_token
 pip3 install -e .
 popd
 
