@@ -142,13 +142,15 @@ def evaluate(*,
         predict_fn=functools.partial(predict_fn, train_state=train_state),
         score_fn=functools.partial(score_fn, train_state=train_state))
 
-    all_metrics = all_metrics.result()
-    logging.info(f"Results:\n{json.dumps(all_metrics, indent=2)}") # Ensure metrics are finished being computed.
-    results_path = f"{output_dir}/results_without_eos.json"
-    with tf.io.gfile.GFile(f"{results_path}.tmp", "w") as f:
-        f.write(json.dumps(all_metrics, indent= 2))
-        f.write("\n")
-    tf.io.gfile.rename(f"{results_path}.tmp", results_path, overwrite=True)
+    # Only one process will update gsutil
+    if jax.process_index() == 0:
+        all_metrics = all_metrics.result()
+        logging.info(f"Results:\n{json.dumps(all_metrics, indent=2)}") # Ensure metrics are finished being computed.
+        results_path = f"{output_dir}/results_without_eos.json"
+        with tf.io.gfile.GFile(f"{results_path}.tmp", "w") as f:
+            f.write(json.dumps(all_metrics, indent= 2))
+            f.write("\n")
+        tf.io.gfile.rename(f"{results_path}.tmp", results_path, overwrite=True)
     # Wait until computations are done before continuing.
     multihost_utils.sync_devices(f'step_{train_state.step}:complete')
 
