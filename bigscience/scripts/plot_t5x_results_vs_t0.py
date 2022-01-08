@@ -36,7 +36,7 @@ def load_t5x_results(dir_path: Path):
 
     all_results = {}
     for child in dir_path.iterdir():
-        with open(child / "results.json", "r") as fi:
+        with open(child / "results_without_eos.json", "r") as fi:
             results = json.load(fi)
         all_results[remove_t0_eval(child.name)] = results
     print(all_results.keys())

@@ -144,7 +144,7 @@ def evaluate(*,
 
     all_metrics = all_metrics.result()
     logging.info(f"Results:\n{json.dumps(all_metrics, indent=2)}") # Ensure metrics are finished being computed.
-    results_path = f"{output_dir}/results.json"
+    results_path = f"{output_dir}/results_without_eos.json"
     with tf.io.gfile.GFile(f"{results_path}.tmp", "w") as f:
         f.write(json.dumps(all_metrics, indent= 2))
         f.write("\n")

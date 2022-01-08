@@ -28,6 +28,7 @@ popd
 
 git clone https://github.com/bigscience-workshop/promptsource.git
 pushd promptsource
+git checkout thomas/seqio_remove_trailing_eos
 pip3 install -r requirements.txt
 pip3 install --ignore-requires-python -e . #needed because `promptsource` forces the use of python 3.7
 popd
@@ -35,6 +36,7 @@ popd
 #rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
+git checkout thomas/seqio_remove_trailing_eos
 pip3 install -e .
 popd
 
