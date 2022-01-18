@@ -17,7 +17,6 @@ LOGS_PATH="/home/teven/logs"
 mkdir -p $LOGS_PATH
 
 echo "original experiment: $ORIGINAL_EXPERIMENT_NAME"
-echo "gin file: $GIN_FILE"
 
 if [[ $ORIGINAL_EXPERIMENT_NAME == c_dec* ]]
 then
@@ -31,6 +30,8 @@ if [[ $ORIGINAL_EXPERIMENT_NAME == enc_dec* ]]
 then
   GIN_FILE=enc_dec_t0_adapt.gin
 fi
+
+echo "gin file: $GIN_FILE"
 if [[ $GIN_FILE == "" ]]
 then
   echo "Incorrect experiment name $ORIGINAL_EXPERIMENT_NAME, does not start with c_dec/nc_dec/enc_dec"
