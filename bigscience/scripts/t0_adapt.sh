@@ -1,3 +1,4 @@
+#!/bin/bash
 python3 -c "import jax; print(jax.device_count()); print(jax.local_device_count())"
 
 # Model dir to save logs, ckpts, etc. in "gs://model_dir" format.
@@ -14,6 +15,9 @@ export PYTHONPATH=${T5X_DIR}/bigscience/gins
 # Logs
 LOGS_PATH="/home/teven/logs"
 mkdir -p $LOGS_PATH
+
+echo "original experiment: $ORIGINAL_EXPERIMENT_NAME"
+echo "gin file: $GIN_FILE"
 
 if [[ $ORIGINAL_EXPERIMENT_NAME == c_dec* ]]
 then
