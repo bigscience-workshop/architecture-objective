@@ -10,7 +10,7 @@ else
 fi
 
 # Logs
-LOGS_PATH="/home/thomas/logs"
+LOGS_PATH="/home/teven/logs"
 mkdir -p $LOGS_PATH
 
 if [[ $ORIGINAL_EXPERIMENT_NAME == c_dec* ]]

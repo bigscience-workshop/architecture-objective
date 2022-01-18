@@ -11,5 +11,5 @@ gcloud alpha compute tpus tpu-vm ssh ${TPU_NAME} --zone ${ZONE} --worker=all --c
 
 # Example to run t5_c4_span_corruption
 #  - run setup vms: sh bigscience/scripts/run_on_all_vms.sh enc_dec_c4_span_corruption "$(cat bigscience/scripts/setup_vm.sh)"
-#  - run t5_c4_span_corruption: sh bigscience/scripts/run_on_all_vms.sh enc_dec_c4_span_corruption "cd code/t5x; git pull; sh bigscience/scripts/launch_command_in_tmux.sh \"sh bigscience/scripts/pretrain.sh enc_dec_c4_span_corruption\""
-#  - kill zombie process: sh bigscience/scripts/run_on_all_vms.sh enc_dec_c4_span_corruption "killall -u thomas"
+#  - run t5_c4_span_corruption: sh bigscience/scripts/run_on_all_vms.sh enc_dec_c4_span_corruption "cd code/t5x; git pull; git checkout teven_paths; sh bigscience/scripts/launch_command_in_tmux.sh \"sh bigscience/scripts/pretrain.sh enc_dec_c4_span_corruption\""
+#  - kill zombie process: sh bigscience/scripts/run_on_all_vms.sh enc_dec_c4_span_corruption "killall -u teven"

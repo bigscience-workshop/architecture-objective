@@ -8,11 +8,11 @@ CHECKPOINT_DIR="gs://bigscience-t5x/arch_objective_exps_v2/$ORIGINAL_EXPERIMENT_
 MODEL_DIR="gs://bigscience-t5x/arch_objective_exps_v2/$EXPERIMENT_NAME"
 
 # directory where the T5X repo is cloned.
-T5X_DIR="/home/thomas/code/t5x"
+T5X_DIR="/home/teven/code/t5x"
 export PYTHONPATH=${T5X_DIR}/bigscience/gins
 
 # Logs
-LOGS_PATH="/home/thomas/logs"
+LOGS_PATH="/home/teven/logs"
 mkdir -p $LOGS_PATH
 
 if [[ $ORIGINAL_EXPERIMENT_NAME == c_dec* ]]

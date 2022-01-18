@@ -275,6 +275,6 @@ if __name__ == "__main__":
 
     gin_utils.run(main)
 
-# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/nc_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/thomas/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/thomas/checkpoints/nc_dec_c4_prefix_lm/checkpoint_420000'"
-# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/c_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/thomas/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/thomas/checkpoints/c_dec_c4_full_lm/checkpoint_420000'"
-# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/enc_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/thomas/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/thomas/checkpoints/enc_dec_c4_prefix_lm/checkpoint_65536'"
+# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/nc_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/teven/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/teven/checkpoints/nc_dec_c4_prefix_lm/checkpoint_420000'"
+# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/c_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/teven/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/teven/checkpoints/c_dec_c4_full_lm/checkpoint_420000'"
+# PYTHONPATH=$(pwd)/bigscience/gins python3 bigscience/scripts/inference_tool.py --gin_file="bigscience/gins/enc_dec_xxl.gin" --gin_file="bigscience/gins/inference_tool.gin" --gin.MODEL_DIR="'/home/teven/model_dir'" --gin.INITIAL_CHECKPOINT_PATH="'/home/teven/checkpoints/enc_dec_c4_prefix_lm/checkpoint_65536'"

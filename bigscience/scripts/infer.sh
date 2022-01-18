@@ -6,11 +6,11 @@ CHECKPOINT_DIR=$1
 EXPERIMENT_DIR=$(dirname "$CHECKPOINT_DIR")
 EXPERIMENT_NAME=$(basename "$EXPERIMENT_DIR")
 # directory where the T5X repo is cloned.
-T5X_DIR="/home/thomas/code/t5x"
+T5X_DIR="/home/teven/code/t5x"
 export PYTHONPATH=${T5X_DIR}/bigscience/gins
 
 # Logs
-LOGS_PATH="/home/thomas/logs"
+LOGS_PATH="/home/teven/logs"
 mkdir -p $LOGS_PATH
 
 if [[ $EXPERIMENT_NAME == c_dec* ]]
@@ -33,7 +33,7 @@ fi
 
 MODEL_GIN_FILE=bigscience/gins/$MODEL_GIN_FILE
 echo "Running the following config: $MODEL_GIN_FILE" 2>&1 | tee $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
-LOCAL_MODEL_DIR=/home/thomas/model_dir
+LOCAL_MODEL_DIR=/home/teven/model_dir
 
 python3 ${T5X_DIR}/bigscience/scripts/inference_tool.py \
   --gin_file="$MODEL_GIN_FILE" \

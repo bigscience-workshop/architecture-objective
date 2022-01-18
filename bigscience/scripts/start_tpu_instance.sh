@@ -24,7 +24,7 @@ RUNTIME_VERSION=v2-alpha-tpuv4-pod
 gcloud alpha compute tpus tpu-vm create ${TPU_NAME} --zone ${ZONE} --accelerator-type ${ACCELERATOR_TYPE} --version ${RUNTIME_VERSION} --subnetwork ${SUBNET}
 
 # Launch your TPU
-# sh bigscience/scripts/start_tpu_instance enc_dec_c4_span_corruption
+# sh bigscience/scripts/start_tpu_instance.sh enc_dec_c4_span_corruption
 
 # Connect to your TPU
 # gcloud alpha compute tpus tpu-vm ssh enc_dec_c4_span_corruption-tpu --zone us-central2-b
