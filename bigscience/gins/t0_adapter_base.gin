@@ -38,7 +38,7 @@ utils.create_learning_rate_scheduler:
   warmup_steps = 10000 # irrelevant
 
 utils.SaveCheckpointConfig:
-  period = 1000  # checkpoint frequency
+  period = 200  # checkpoint frequency
   keep = None # only keep one checkpoint
 
 utils.RestoreCheckpointConfig:
