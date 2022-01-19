@@ -8,7 +8,7 @@ from t5x import utils
 import task
 
 MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
-TRAIN_STEPS = 65536
+TRAIN_STEPS = 131072
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 

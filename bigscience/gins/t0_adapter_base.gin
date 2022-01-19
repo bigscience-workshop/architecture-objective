@@ -10,7 +10,7 @@ import seqio
 import task # To import seqio task
 
 MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
-TRAIN_STEPS = 70536 # 65536 (pretrain) + 5000 (finetune)
+TRAIN_STEPS = 136072 # 131072 (pretrain) + 5000 (finetune)
 DROPOUT_RATE = 0.1
 BATCH_SIZE = 2048
 
