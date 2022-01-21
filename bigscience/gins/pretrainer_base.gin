@@ -8,7 +8,7 @@ from t5x import utils
 import task
 
 MIXTURE_OR_TASK_MODULE = "t5.data.mixtures"
-TRAIN_STEPS = 131072
+TRAIN_STEPS = 262144
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
@@ -36,7 +36,7 @@ utils.create_learning_rate_scheduler:
   warmup_steps = 10000
 
 utils.SaveCheckpointConfig:
-  period = 2000  # checkpoint frequency
+  period = 500  # checkpoint frequency
   keep = None # only keep one checkpoint
 
 partitioning.ModelBasedPjitPartitioner:

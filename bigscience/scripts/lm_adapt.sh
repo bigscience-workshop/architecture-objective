@@ -72,3 +72,4 @@ python3 ${T5X_DIR}/t5x/train.py \
   2>&1 | tee -a $LOGS_PATH/pretrain_$EXPERIMENT_NAME.txt
 
 # sh bigscience/scripts/lm_adapt.sh c_dec_c4_span_corruption_bs_128 420000
+# bash bigscience/scripts/lm_adapt.sh nc_dec_c4_span_corruption_bs_128 131072 true
