@@ -31,12 +31,12 @@ popd
 
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
-pip3 install -e .
+pip3 install -e ".[bigscience]"
 popd
 
 git clone https://github.com/EleutherAI/lm-evaluation-harness.git
 pushd lm-evaluation-harness
-pip3 install -e ".[bigscience]"
+pip3 install -e .
 popd
 
 # TODO: figure if this is actually important
