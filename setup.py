@@ -55,7 +55,7 @@ setuptools.setup(
         't5',
         'tensorflow',
         'tensorstore==0.1.13',
-        'promptsource'
+        "t0[seqio_tasks]"
     ],
     extras_require={
         'gcp': [

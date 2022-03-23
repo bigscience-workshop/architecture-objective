@@ -3,7 +3,7 @@ import json
 import time
 
 from parse_eai_results import process_eai_results
-from parse_promptsource import process_ps_results
+from parse_t0 import process_t0_results
 
 if __name__ == "__main__":
     previous_clipboard = clipboard.paste()

@@ -2,7 +2,7 @@ import functools
 
 import seqio
 
-from promptsource import seqio_tasks
+from t0 import seqio_tasks
 
 # --- Seqio ---
 seqio.add_global_cache_dirs([

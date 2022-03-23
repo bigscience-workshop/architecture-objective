@@ -19,19 +19,10 @@ git clone https://github.com/google-research/text-to-text-transfer-transformer.g
 pushd text-to-text-transfer-transformer
 pip3 install -e .
 popd
-#rm -rf text-to-text-transfer-transformer
-#git clone https://github.com/thomasw21/text-to-text-transfer-transformer.git
-#pushd text-to-text-transfer-transformer
-#git checkout fix_prefix_lm_obj
-#pip3 install -e .
-#popd
 
-git clone https://github.com/bigscience-workshop/promptsource.git
-pushd promptsource
-git reset e65186c2b8a544de1eb5c283b11b235033b01514 --hard
-pip3 install black==21.12b0 # conflicts with streamlit
-pip3 install -r requirements.txt
-pip3 install --ignore-requires-python -e . #needed because `promptsource` forces the use of python 3.7
+git clone https://github.com/bigscience-workshop/t-zero.git
+pushd t-zero
+pip3 install -e .
 popd
 
 #rm -rf t5x
