@@ -14,14 +14,6 @@ pushd text-to-text-transfer-transformer
 pip3 install -e .
 popd
 
-# Install promptsource
-# TODO: remove once promptsource v0.2.2 is available in pypi
-git clone https://github.com/bigscience-workshop/promptsource.git
-pushd promptsource
-git checkout tags/v0.2.2
-pip3 install -e .
-popd
-
 git clone https://github.com/bigscience-workshop/t-zero.git
 pushd t-zero
 # TODO: remove once https://github.com/bigscience-workshop/t-zero/pull/24 is merged
