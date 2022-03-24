@@ -85,13 +85,13 @@ def process_task_prompt(task_prompt: str) -> tuple[str, str]:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Get formatted promptsource tasks & results for c/p in spreadsheet"
+        description="Get formatted t0 tasks & results for c/p in spreadsheet"
     )
     parser.add_argument(
         "-i",
         "--ps-results-file",
         type=str,
-        help="Path to a promptsource .json result file",
+        help="Path to a t0 .json result file",
     )
     parser.add_argument(
         "-t",

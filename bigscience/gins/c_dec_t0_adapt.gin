@@ -3,7 +3,7 @@ from __gin__ import dynamic_registration
 from t5x import models
 from t5x import utils
 import seqio
-from promptsource import seqio_tasks
+from t0 import seqio_tasks
 
 include "bigscience/gins/c_dec_xxl.gin"
 include "t5x/configs/runs/finetune.gin"

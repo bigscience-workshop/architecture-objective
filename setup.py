@@ -55,7 +55,6 @@ setuptools.setup(
         't5',
         'tensorflow',
         'tensorstore==0.1.13',
-        'promptsource'
     ],
     extras_require={
         'gcp': [
@@ -63,6 +62,9 @@ setuptools.setup(
             'google-cloud-storage', 'oauth2client'
         ],
         'test': ['pytest'],
+        'bigscience': [
+            "t0[seqio_tasks]"
+        ]
     },
     classifiers=[
         'Development Status :: 4 - Beta',

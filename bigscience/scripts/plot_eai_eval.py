@@ -8,8 +8,6 @@ from pathlib import Path
 import numpy as np
 from matplotlib import pyplot as plt
 
-# gcloud alpha compute tpus tpu-vm scp thomas-dev-tpu:~/arch_objective_exps_v2 .  --zone us-central2-b --recurse
-
 def get_args():
     parser = ArgumentParser()
     parser.add_argument('--all', action="store_true", help="Plot all results in a single plot")

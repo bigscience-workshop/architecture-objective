@@ -5,39 +5,25 @@ rm libtpu_tpuv4-0.1.dev*
 gsutil cp gs://cloud-tpu-tpuvm-v4-artifacts/wheels/libtpu/latest/libtpu_tpuv4-0.1.dev* .
 pip3 install libtpu_tpuv4-0.1.dev*
 
-### ...
-##pip3 install tensorflow==2.7.0
-#rm tensorflow-2.7.0-cp38-cp38-linux_x86_64.whl
-#gsutil cp gs://cloud-tpu-tpuvm-v4-artifacts/wheels/tensorflow/tf-2-7-0/tensorflow-2.7.0-cp38-cp38-linux_x86_64.whl .
-#pip3 install tensorflow-2.7.0-cp38-cp38-linux_x86_64.whl tensorflow-text==2.7.0
-
 mkdir -p ~/code
 cd ~/code
 
-# Install t5 first
+# Install t5 master version
 git clone https://github.com/google-research/text-to-text-transfer-transformer.git
 pushd text-to-text-transfer-transformer
 pip3 install -e .
 popd
-#rm -rf text-to-text-transfer-transformer
-#git clone https://github.com/thomasw21/text-to-text-transfer-transformer.git
-#pushd text-to-text-transfer-transformer
-#git checkout fix_prefix_lm_obj
-#pip3 install -e .
-#popd
 
-git clone https://github.com/bigscience-workshop/promptsource.git
-pushd promptsource
-git reset e65186c2b8a544de1eb5c283b11b235033b01514 --hard
-pip3 install black==21.12b0 # conflicts with streamlit
-pip3 install -r requirements.txt
-pip3 install --ignore-requires-python -e . #needed because `promptsource` forces the use of python 3.7
+git clone https://github.com/bigscience-workshop/t-zero.git
+pushd t-zero
+# TODO: remove once https://github.com/bigscience-workshop/t-zero/pull/24 is merged
+git checkout thomas/update_promptsource_dependency
+pip3 install -e ".[seqio_tasks]"
 popd
 
-#rm -rf t5x
 git clone https://github.com/bigscience-workshop/t5x.git
 pushd t5x
-pip3 install -e .
+pip3 install -e ".[bigscience]"
 popd
 
 git clone https://github.com/EleutherAI/lm-evaluation-harness.git
