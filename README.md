@@ -1,11 +1,37 @@
 # What Language Model Architecture and Pretraining Objective Work Best for Zero-Shot Generalization?
 
-Large pretrained Transformer language models have been shown to exhibit zero-shot generalization, i.e. they can perform a wide variety of tasks that they were not explicitly trained on. However, the architectures and pretraining objectives used across state-of-the-art models differ significantly, and there has been limited systematic comparison of these factors. In this work, we present a large-scale evaluation of modeling choices and their impact on zero-shot generalization. In particular, we focus on text-to-text models and experiment with three model architectures (causal/non-causal decoder-only and encoder-decoder), trained with two different pretraining objectives (autoregressive and masked language modeling), and evaluated with and without multitask prompted finetuning. We train models with over 5 billion parameters for more than 170 billion tokens, thereby increasing the likelihood that our conclusions will transfer to even larger scales. Our experiments show that causal decoder-only models trained on an autoregressive language modeling objective exhibit the strongest zero-shot generalization after purely unsupervised pretraining. However, models with non-causal visibility on their input trained with a masked language modeling objective followed by multitask finetuning perform the best among our experiments. We therefore consider the adaptation of pretrained models across architectures and objectives. We find that pretrained non-causal decoder models can be adapted into performant generative causal decoder models, using autoregressive language modeling as a downstream task. Furthermore, we find that pretrained causal decoder models can be efficiently adapted into non-causal decoder models, ultimately achieving competitive performance after multitask finetuning. 
+Large pretrained Transformer language models have been shown to exhibit *zero-shot generalization*, i.e. they can perform a wide variety of tasks that they were not explicitly trained on.
+However, the architectures and pretraining objectives used across state-of-the-art models differ significantly, and there has been limited systematic comparison of these factors.
+In this work, we present a large-scale evaluation of modeling choices and their impact on zero-shot generalization.
+In particular, we focus on text-to-text models and experiment with three model architectures (causal/non-causal decoder-only and encoder-decoder), trained with two different pretraining objectives (autoregressive and masked language modeling), and evaluated with and without multitask prompted finetuning. 
+We train models with over 5 billion parameters for more than 168 billion tokens, thereby increasing the likelihood that our conclusions will transfer to even larger scales.
+Our experiments show that causal decoder-only models trained on an autoregressive language modeling objective exhibit the strongest zero-shot generalization after purely self-supervised pretraining.
+However, models with non-causal visibility on their input trained with a masked language modeling objective followed by multitask finetuning perform the best among our experiments.
+We therefore consider the adaptation of pretrained models across architectures and objectives.
+Code and checkpoints are available at [https://github.com/bigscience-workshop/architecture-objective](https://github.com/bigscience-workshop/architecture-objective).
 
 Full paper is available at: https://arxiv.org/abs/2204.05832
 
 ## Checkpoints
+
 // TODO (@thomasw21):  link to checkpoints.
+
+| checkpoints | path |
+|-------------|------|
+| CD:FLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/c_dec_c4_full_lm_bs2048/checkpoint_131072 |
+| ND:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/enc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
+| ED:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/nc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
+| CD:FLM (168B) + CD:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_131072-cd_mtf_141072/checkpoint_141072 |
+| ND:PLM (168B) + ND:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/nd_plm_131072-nd_mtf_141072/checkpoint_141072 |
+| ED:PLM (168B) + ED:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/ed_plm_131072-ed_mtf_141072/checkpoint_141072 |
+| CD:MLM (168B) + CD:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_mlm_131072-cd_mtf_141072/checkpoint_141072 |
+| ND:MLM (168B) + ND:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/nd_mlm_131072-nd_mtf_141072/checkpoint_141072 |
+| ED:MLM (168B) + ED:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/ed_mlm_131072-ed_mtf_141072/checkpoint_141072 |
+| CD:FLM (219B) | TODO @thomasw21 |
+| CD:FLM (219B) + ND:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_171008-cd_mtf_181008/checkpoint_181008 |
+| CD:FLM (219B) + ND:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_171008-nd_mtf_181008/checkpoint_181008 |
+| CD:FLM (168B) + ND:MLM (51B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_131072-nd_mlm_171008/checkpoint_171008 |
+| CD:FLM (168B) + ND:MLM (51B) + MTF (13B)| gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_131072-nd_mlm_171008-nd_mtf_181008/checkpoint_181008 |
 
 ## How to cite
 
