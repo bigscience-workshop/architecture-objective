@@ -19,8 +19,8 @@ Full paper is available at: https://arxiv.org/abs/2204.05832
 | checkpoints | path |
 |-------------|------|
 | CD:FLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/c_dec_c4_full_lm_bs2048/checkpoint_131072 |
-| ND:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/enc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
-| ED:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/nc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
+| ND:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/nc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
+| ED:PLM (168B) | gs://bigscience-t5x/arch_objective_exps_v2/enc_dec_c4_prefix_lm_bs2048/checkpoint_131072 |
 | CD:FLM (168B) + CD:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/cd_flm_131072-cd_mtf_141072/checkpoint_141072 |
 | ND:PLM (168B) + ND:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/nd_plm_131072-nd_mtf_141072/checkpoint_141072 |
 | ED:PLM (168B) + ED:MTF (13B) | gs://bigscience-t5x/arch_objective_exps_v2/dropout_reruns/ed_plm_131072-ed_mtf_141072/checkpoint_141072 |
