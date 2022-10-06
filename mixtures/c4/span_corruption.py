@@ -3,9 +3,9 @@ import seqio
 from t5.data import preprocessors, utils
 import tensorflow as tf
 
-# seqio.add_global_cache_dirs(
-#     ['gs://t5x-test/seqio_cached_tasks/']
-# )
+seqio.add_global_cache_dirs(
+    ['gs://t5x-test/seqio_cached_tasks/']
+)
 
 vocabulary = seqio.SentencePieceVocabulary(
     'gs://t5-data/vocabs/cc_all.32000/sentencepiece.model', extra_ids=100)
@@ -24,9 +24,9 @@ DEFAULT_OUTPUT_FEATURES = {
 
 DATASET_FOLDER="gs://t5x-test/data/c4/raw/raw//"
 DATASET_SPLITS_TO_FILEPATTERN={
-    "train": ["gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
-    "val": ["gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
-    "test": ["gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
+    "train": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
+    "val": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
+    "test": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
 }
 
 @utils.map_over_dataset

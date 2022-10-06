@@ -30,8 +30,7 @@ TASK_FEATURE_LENGTHS = %gin.REQUIRED
 TRAIN_STEPS = %gin.REQUIRED
 MODEL_DIR = %gin.REQUIRED
 BATCH_SIZE = 128
-USE_CACHED_TASKS = False
-# ^ changed from default
+USE_CACHED_TASKS = True
 
 # DEPRECATED: Import the this module in your gin file.
 MIXTURE_OR_TASK_MODULE = None
