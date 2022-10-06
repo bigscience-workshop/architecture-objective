@@ -24,9 +24,9 @@ DEFAULT_OUTPUT_FEATURES = {
 
 DATASET_FOLDER="gs://t5x-test/data/c4/raw/raw//"
 DATASET_SPLITS_TO_FILEPATTERN={
-    "train": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
-    "val": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
-    "test": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for _ in range(1024)],
+    "train": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for i in range(1024)],
+    "val": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for i in range(1024)],
+    "test": [f"gs://t5x-test/data/c4/raw/raw//c4-train.{i:05}-of-01024.json" for i in range(1024)],
 }
 
 @utils.map_over_dataset
