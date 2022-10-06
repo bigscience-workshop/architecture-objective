@@ -31,12 +31,12 @@ DATASET_SPLITS_TO_FILEPATTERN={
 
 @utils.map_over_dataset
 def extract_text_from_json_tf(json: str):
-    output = tf.strings.split(json, '{"text": "', maxsplit=1)[1]
-    output = tf.strings.split(output, '", "meta": {', maxsplit=1)[0]
+    output = tf.strings.split(json, '{"text":"', maxsplit=1)[1]
+    output = tf.strings.split(output, '",', maxsplit=1)[0]
     return {"text": output}
 
 seqio.TaskRegistry.add(
-    'c4_eye_span_corruption', # version of c4 corresponding to one hosted on the eye - tbd whether 
+    'c4_eye_span_corruption', # version of c4 corresponding to one hosted on the-eye
     source=seqio.TextLineDataSource(
         split_to_filepattern=DATASET_SPLITS_TO_FILEPATTERN,
     ),
