@@ -22,7 +22,7 @@ DEFAULT_OUTPUT_FEATURES = {
         vocabulary=vocabulary, add_eos=True)
 }
 
-DATASET_FOLDER="gs://t5x-test/data/c4/raw"
+DATASET_FOLDER="gs://t5x-test/data/c4/raw/raw//"
 DATASET_SPLITS_TO_FILEPATTERN={
     "train": f"{DATASET_FOLDER}/*.json",
     "val": f"{DATASET_FOLDER}/*.json",
