@@ -1,0 +1,13 @@
+include 't5x/examples/t5/t5_1_1/small.gin'
+include 't5x/configs/runs/pretrain.gin'
+
+# Register necessary SeqIO Tasks/Mixtures.
+import tasks
+
+#MIXTURE_OR_TASK_NAME = "c4_v220_span_corruption"
+#MIXTURE_OR_TASK_NAME = "c4_webtext_span_corruption"
+MIXTURE_OR_TASK_NAME = "wikipedia.en_unsupervised"
+TASK_FEATURE_LENGTHS = {"inputs": 512, "targets": 114}
+TRAIN_STEPS = 10000
+DROPOUT_RATE = 0.0
+BATCH_SIZE = 256
