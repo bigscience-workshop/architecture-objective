@@ -3,6 +3,10 @@ import seqio
 from t5.data import preprocessors, utils
 import tensorflow as tf
 
+seqio.add_global_cache_dirs(
+    ['gs://t5x-test/seqio_cached_tasks/']
+)
+
 vocabulary = seqio.SentencePieceVocabulary(
     'gs://t5-data/vocabs/cc_all.32000/sentencepiece.model', extra_ids=100)
 output_features = {
