@@ -74,7 +74,7 @@ def main():
     #     functools.partial(download_unztd_and_send_to_gcloud, local_base_dir=local_base_dir, gcp_base=gcp_base),
     #     [local_path for _, local_paths in pile_urls.items() for local_path in local_paths]
     # )
-    for local_path in [local_path for _, local_paths in tqdm(pile_urls.items()) for local_path in local_paths]:
+    for local_path in [local_path for _, local_paths in tqdm(c4_urls.items()) for local_path in local_paths]:
         download_unztd_and_send_to_gcloud(local_path, local_base_dir=local_base_dir, gcp_base=gcp_base)
 
 if __name__ == "__main__":
