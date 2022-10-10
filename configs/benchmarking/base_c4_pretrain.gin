@@ -31,3 +31,9 @@ train/utils.DatasetConfig:
   use_cached = %USE_CACHED_TASKS
   pack = True
   module = %MIXTURE_OR_TASK_MODULE
+
+utils.SaveCheckpointConfig:
+  period = 10000
+  dtype = 'float32'
+  keep = None  # keep all checkpoints
+  save_dataset = False  # don't checkpoint dataset state
