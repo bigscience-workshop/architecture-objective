@@ -19,3 +19,14 @@ BATCH_SIZE = 2048
 
 train_script.train:
   eval_period = 2000
+
+train/utils.DatasetConfig:
+  mixture_or_task_name = %MIXTURE_OR_TASK_NAME
+  task_feature_lengths = %TASK_FEATURE_LENGTHS
+  split = 'train'
+  batch_size = %BATCH_SIZE
+  shuffle = %SHUFFLE_TRAIN_EXAMPLES
+  seed = 42  # use a new seed each run/restart
+  use_cached = %USE_CACHED_TASKS
+  pack = True
+  module = %MIXTURE_OR_TASK_MODULE
