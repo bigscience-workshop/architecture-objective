@@ -732,7 +732,7 @@ if __name__ == '__main__':
 
       logging.info(
           'Initializing distributed system for multi-host GPU:\n'
-          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s',
+          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s\n process_device_ids: %s',
           FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index, FLAGS.process_device_ids)
 
       jax.distributed.initialize(
