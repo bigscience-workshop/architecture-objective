@@ -706,7 +706,7 @@ if __name__ == '__main__':
       'process_index', None, help='Index of this process.')
   
   flags.DEFINE_integer(
-      'process_device_ids', None, help='Id of visible local devices.')
+      'process_num_device', 1, help='Number of visible local devices.')
 
 
 
@@ -724,6 +724,8 @@ if __name__ == '__main__':
       if FLAGS.process_index == None:
         FLAGS.process_index = os.environ['SLURM_PROCID']
 
+      FLAGS.process_num_device = list(range(FLAGS.process_num_device))
+
       if (FLAGS.coordinator_address is None or FLAGS.process_count is None or
           FLAGS.process_index is None):
         raise ValueError(
@@ -732,14 +734,14 @@ if __name__ == '__main__':
 
       logging.info(
           'Initializing distributed system for multi-host GPU:\n'
-          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s\n process_device_ids: %s',
-          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index, FLAGS.process_device_ids)
+          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s\n process_num_device: %s',
+          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index, FLAGS.process_num_device)
 
       jax.distributed.initialize(
         FLAGS.coordinator_address,
         FLAGS.process_count,
         FLAGS.process_index,
-        FLAGS.process_device_ids
+        FLAGS.process_num_device
         )
 
     if FLAGS.tfds_data_dir:
