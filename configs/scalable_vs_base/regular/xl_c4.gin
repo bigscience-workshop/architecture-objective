@@ -18,6 +18,7 @@ DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
 Trainer.num_microbatches = 8
+partitioning.PjitPartitioner.num_partitions = 2
 
 MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_regular"
 
