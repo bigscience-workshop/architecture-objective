@@ -19,7 +19,7 @@ TRAIN_STEPS = 500000
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
-# trainer.Trainer.num_microbatches = 8
+trainer.Trainer.num_microbatches = 4
 
 train_script.train:
   partitioner = @partitioning.PjitPartitioner()
