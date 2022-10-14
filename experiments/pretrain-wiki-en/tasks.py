@@ -18,14 +18,6 @@ output_features = {
 TaskRegistry.add(
     "wikipedia.en_unsupervised",
     source=seqio.TfdsDataSource(tfds_name="wikipedia/20200301.en:1.0.0"),
-    #source=seqio.TfdsDataSource(tfds_name="c4/en:3.0.1"),
-    #source=seqio.TfdsDataSource(
-    #    tfds_name="c4/en.webtextlike:3.0.1",
-    #    splits={
-    #        "train": "train[:85%]",
-    #        "validation": "train[85%:90%]",
-    #        "test": "validation"
-    #    }),
     preprocessors=[
         functools.partial(
             preprocessors.rekey, key_map={

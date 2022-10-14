@@ -46,6 +46,7 @@ from t5x import trainer as trainer_lib
 from t5x import utils
 import tensorflow as tf
 
+#tf.config.experimental.set_visible_devices([], "GPU")
 
 # Automatically search for gin files relative to the T5X package.
 _DEFAULT_GIN_SEARCH_PATHS = [
@@ -701,7 +702,11 @@ if __name__ == '__main__':
   flags.DEFINE_integer(
       'process_count', None, help='Number of processes for multi-host GPU.')
 
-  flags.DEFINE_integer('process_index', None, help='Index of this process.')
+  flags.DEFINE_integer(
+      'process_index', None, help='Index of this process.')
+  
+  flags.DEFINE_integer(
+      'process_device_ids', None, help='Id of visible local devices.')
 
 
 
@@ -716,6 +721,9 @@ if __name__ == '__main__':
 
 
     if FLAGS.multiprocess_gpu:
+      if FLAGS.process_index == None:
+        FLAGS.process_index = os.environ['SLURM_PROCID']
+
       if (FLAGS.coordinator_address is None or FLAGS.process_count is None or
           FLAGS.process_index is None):
         raise ValueError(
@@ -725,10 +733,14 @@ if __name__ == '__main__':
       logging.info(
           'Initializing distributed system for multi-host GPU:\n'
           '  coordinator_address: %s\n  process_count: %s\n  process_index: %s',
-          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index)
+          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index, FLAGS.process_device_ids)
 
-      jax.distributed.initialize(FLAGS.coordinator_address, FLAGS.process_count,
-                                 FLAGS.process_index)
+      jax.distributed.initialize(
+        FLAGS.coordinator_address,
+        FLAGS.process_count,
+        FLAGS.process_index,
+        FLAGS.process_device_ids
+        )
 
     if FLAGS.tfds_data_dir:
       seqio.set_tfds_data_dir_override(FLAGS.tfds_data_dir)
