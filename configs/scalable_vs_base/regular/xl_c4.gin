@@ -4,6 +4,8 @@ from __gin__ import dynamic_registration
 import __main__ as train_script
 
 from t5x import utils
+from t5x import partitioning
+from t5x import trainer
 
 include 't5x/examples/t5/t5_1_1/xl.gin'
 include 't5x/configs/runs/pretrain.gin'
