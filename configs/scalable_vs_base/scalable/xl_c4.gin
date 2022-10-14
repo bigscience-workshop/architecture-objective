@@ -20,7 +20,7 @@ BATCH_SIZE = 2048
 
 MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_scalable"
 
-Trainer.num_microbatches = 8
+trainer.Trainer.num_microbatches = 8
 
 # train_script.train:
 #   partitioner = @partitioning.PjitPartitioner()
