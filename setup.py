@@ -48,7 +48,7 @@ setuptools.setup(
     install_requires=[
         'absl-py',
         'cached_property',
-        'clu @ git+https://github.com/google/CommonLoopUtils#egg=clu',
+        'clu @ git+https://github.com/EleutherAI/CommonLoopUtils.git@add_wandb#egg=clu',
         'flax @ git+https://github.com/google/flax#egg=flax',
         'gin-config',
         f'jax >= {_jax_version}',
