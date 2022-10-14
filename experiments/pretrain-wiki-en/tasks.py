@@ -13,8 +13,6 @@ output_features = {
     'targets': seqio.Feature(vocabulary=vocabulary, add_eos=True)
 }
 
-# ==================================== C4 ======================================
-# Final pretraining task used in Raffel et al., 2019.
 TaskRegistry.add(
     "wikipedia.en_unsupervised",
     source=seqio.TfdsDataSource(tfds_name="wikipedia/20200301.en:1.0.0"),
