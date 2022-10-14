@@ -17,7 +17,7 @@ TRAIN_STEPS = 500000
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
-MODEL_DIR = "gs://t5x-test/ckpts/benchmark/base_c4_scalable"
+MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_scalable"
 
 train_script.train:
   eval_period = 2000
