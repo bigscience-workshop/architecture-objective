@@ -17,6 +17,8 @@ TRAIN_STEPS = 500000
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
+Trainer.num_microbatches = 8
+
 MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_regular"
 
 train_script.train:
