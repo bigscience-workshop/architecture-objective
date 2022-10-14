@@ -17,8 +17,22 @@ TRAIN_STEPS = 500000
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
-Trainer.num_microbatches = 8
-partitioning.PjitPartitioner.num_partitions = 2
+# trainer.Trainer.num_microbatches = 8
+
+train_script.train:
+  partitioner = @partitioning.PjitPartitioner()
+
+partitioning.PjitPartitioner:
+  num_partitions = 1
+  logical_axis_rules= @partitioning.standard_logical_axis_rules()
+
+partitioning.standard_logical_axis_rules:
+  activation_partitioning_dims = 2
+  parameter_partitioning_dims = 2
+
+train_script.train:
+  eval_period = 200
+
 
 MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_regular"
 
