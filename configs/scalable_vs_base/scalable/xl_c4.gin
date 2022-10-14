@@ -21,18 +21,18 @@ BATCH_SIZE = 2048
 
 MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_scalable"
 
-trainer.Trainer.num_microbatches = 8
+# trainer.Trainer.num_microbatches = 8
 
-# train_script.train:
-#   partitioner = @partitioning.PjitPartitioner()
+train_script.train:
+  partitioner = @partitioning.PjitPartitioner()
 
-# partitioning.PjitPartitioner:
-#   num_partitions = 1
-#   logical_axis_rules= @partitioning.standard_logical_axis_rules()
+partitioning.PjitPartitioner:
+  num_partitions = 1
+  logical_axis_rules= @partitioning.standard_logical_axis_rules()
 
-# partitioning.standard_logical_axis_rules:
-#   activation_partitioning_dims = 2
-#   parameter_partitioning_dims = 2
+partitioning.standard_logical_axis_rules:
+  activation_partitioning_dims = 2
+  parameter_partitioning_dims = 2
 
 train_script.train:
   eval_period = 2000
