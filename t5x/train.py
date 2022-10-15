@@ -252,8 +252,7 @@ def train(
   train_iter = get_dataset_fn(train_dataset_cfg, ds_shard_id, num_ds_shards,
                               model.FEATURE_CONVERTER_CLS)
   if isinstance(train_iter, tf.data.Dataset):
-    # Need to figure out how to resolve this, Hailey's solution didn't work for my case.
-    train_iter = clu.data.TfDatasetIterator(train_iter) #, True)
+    train_iter = clu.data.TfDatasetIterator(train_iter, True)
   elif not isinstance(train_iter, clu.data.dataset_iterator.DatasetIterator):
     raise ValueError(
         f'get_dataset_fn returned unsupported type {type(train_iter)}.')
