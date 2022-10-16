@@ -19,7 +19,7 @@ TRAIN_STEPS = 500000
 DROPOUT_RATE = 0.0
 BATCH_SIZE = 2048
 
-trainer.Trainer.num_microbatches = 4
+trainer.Trainer.num_microbatches = 2
 
 train_script.train:
   partitioner = @partitioning.PjitPartitioner()
@@ -36,7 +36,7 @@ train_script.train:
   eval_period = 200
 
 
-MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_regular"
+MODEL_DIR = "gs://t5x-test/ckpts/benchmark/xl_c4_regular_microbatches2"
 
 train_script.train:
   eval_period = 2000
