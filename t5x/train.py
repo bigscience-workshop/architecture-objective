@@ -46,7 +46,7 @@ from t5x import trainer as trainer_lib
 from t5x import utils
 import tensorflow as tf
 
-#tf.config.experimental.set_visible_devices([], "GPU")
+tf.config.experimental.set_visible_devices([], "GPU")
 
 # Automatically search for gin files relative to the T5X package.
 _DEFAULT_GIN_SEARCH_PATHS = [
@@ -558,6 +558,10 @@ def train(
   else:
     dummy_batch = jax.tree_map(lambda x: np.ones(x.shape, x.dtype),
                                train_iter.element_spec)
+  logging.info('Batch Shape, %d x %d',
+               dummy_batch["decoder_input_tokens"].shape[0],
+               dummy_batch["decoder_input_tokens"].shape[1]
+               )
   if not isinstance(dummy_batch, Mapping):
     raise ValueError('Training loop expects batches to have type '
                      f'Mapping[str, np.ndarray] but got {type(dummy_batch)}.')
@@ -724,7 +728,24 @@ if __name__ == '__main__':
       if FLAGS.process_index == None:
         FLAGS.process_index = int(os.environ['SLURM_PROCID'])
 
-      FLAGS.process_num_device = list(range(FLAGS.process_num_device))
+      num_nodes = int(os.environ['SLURM_NNODES'])
+      num_procs = int(os.environ['SLURM_NPROCS'])
+
+      num_local_devices = 8 #jax.local_device_count()
+      num_global_device = num_nodes * num_local_devices
+
+      n = num_global_device// num_procs
+      part_idx = num_local_devices//n
+      gpu_idx = list(range(num_local_devices))
+      gpu_partition = [gpu_idx[i:i + n] for i in range(0, len(gpu_idx), n)]
+
+      # FLAGS.process_num_device = list(range(FLAGS.process_num_device))
+      if FLAGS.process_num_device == -1:
+        FLAGS.process_num_device = gpu_partition[FLAGS.process_index%part_idx]
+      elif FLAGS.process_num_device == 1:
+        FLAGS.process_num_device = [FLAGS.process_index%8]
+      else:
+        FLAGS.process_num_device = list(range(FLAGS.process_num_device))
 
       if (FLAGS.coordinator_address is None or FLAGS.process_count is None or
           FLAGS.process_index is None):
