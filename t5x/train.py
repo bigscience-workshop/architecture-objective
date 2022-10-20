@@ -46,6 +46,7 @@ from t5x import trainer as trainer_lib
 from t5x import utils
 import tensorflow as tf
 
+tf.config.experimental.set_visible_devices([], "GPU")
 
 # Automatically search for gin files relative to the T5X package.
 _DEFAULT_GIN_SEARCH_PATHS = [
@@ -557,6 +558,10 @@ def train(
   else:
     dummy_batch = jax.tree_map(lambda x: np.ones(x.shape, x.dtype),
                                train_iter.element_spec)
+  logging.info('Batch Shape, %d x %d',
+               dummy_batch["decoder_input_tokens"].shape[0],
+               dummy_batch["decoder_input_tokens"].shape[1]
+               )
   if not isinstance(dummy_batch, Mapping):
     raise ValueError('Training loop expects batches to have type '
                      f'Mapping[str, np.ndarray] but got {type(dummy_batch)}.')
@@ -701,7 +706,11 @@ if __name__ == '__main__':
   flags.DEFINE_integer(
       'process_count', None, help='Number of processes for multi-host GPU.')
 
-  flags.DEFINE_integer('process_index', None, help='Index of this process.')
+  flags.DEFINE_integer(
+      'process_index', None, help='Index of this process.')
+  
+  flags.DEFINE_integer(
+      'process_num_device', 1, help='Number of visible local devices.')
 
 
 
@@ -716,6 +725,28 @@ if __name__ == '__main__':
 
 
     if FLAGS.multiprocess_gpu:
+      if FLAGS.process_index == None:
+        FLAGS.process_index = int(os.environ['SLURM_PROCID'])
+
+      num_nodes = int(os.environ['SLURM_NNODES'])
+      num_procs = int(os.environ['SLURM_NPROCS'])
+
+      num_local_devices = 8 #jax.local_device_count()
+      num_global_device = num_nodes * num_local_devices
+
+      n = num_global_device// num_procs
+      part_idx = num_local_devices//n
+      gpu_idx = list(range(num_local_devices))
+      gpu_partition = [gpu_idx[i:i + n] for i in range(0, len(gpu_idx), n)]
+
+      # FLAGS.process_num_device = list(range(FLAGS.process_num_device))
+      if FLAGS.process_num_device == -1:
+        FLAGS.process_num_device = gpu_partition[FLAGS.process_index%part_idx]
+      elif FLAGS.process_num_device == 1:
+        FLAGS.process_num_device = [FLAGS.process_index%8]
+      else:
+        FLAGS.process_num_device = list(range(FLAGS.process_num_device))
+
       if (FLAGS.coordinator_address is None or FLAGS.process_count is None or
           FLAGS.process_index is None):
         raise ValueError(
@@ -724,11 +755,15 @@ if __name__ == '__main__':
 
       logging.info(
           'Initializing distributed system for multi-host GPU:\n'
-          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s',
-          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index)
+          '  coordinator_address: %s\n  process_count: %s\n  process_index: %s\n  process_num_device: %s',
+          FLAGS.coordinator_address, FLAGS.process_count, FLAGS.process_index, FLAGS.process_num_device)
 
-      jax.distributed.initialize(FLAGS.coordinator_address, FLAGS.process_count,
-                                 FLAGS.process_index)
+      jax.distributed.initialize(
+        FLAGS.coordinator_address,
+        FLAGS.process_count,
+        FLAGS.process_index,
+        local_device_ids=FLAGS.process_num_device
+        )
 
     if FLAGS.tfds_data_dir:
       seqio.set_tfds_data_dir_override(FLAGS.tfds_data_dir)
