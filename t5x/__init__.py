@@ -25,6 +25,7 @@ import t5x.state_utils
 import t5x.train_state
 import t5x.trainer
 import t5x.utils
+import t5x.data
 
 # Version number.
 from t5x.version import __version__
