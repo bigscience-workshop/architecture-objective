@@ -45,6 +45,8 @@ class CustomDataSource(seqio.FileDataSource):
         """
         # Used during caching.
         self._data_dir = seqio.utils._TFDS_DATA_DIR_OVERRIDE
+        if self._data_dir is None:
+            self._data_dir = ""
         self._skip_header_lines = skip_header_lines
 
         def read_file_fn(filepattern):
