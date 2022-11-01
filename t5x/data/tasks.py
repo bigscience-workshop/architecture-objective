@@ -85,5 +85,5 @@ for task_name in SGLUE_LIST:
 MixtureRegistry.add(
   name="sglue_flan_style",
   tasks=SGLUE_SUBSET,
-  default_rate=functools.partial(seqio.mixing_rate_num_examples, maximum=3000)
+  default_rate=functools.partial(seqio.mixing_rate_num_examples) #, maximum=3000)
   )
