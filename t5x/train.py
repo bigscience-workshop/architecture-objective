@@ -712,7 +712,11 @@ if __name__ == '__main__':
   flags.DEFINE_integer(
       'process_num_device', 1, help='Number of visible local devices.')
 
-
+  flags.DEFINE_boolean(
+      'disable_gc',
+      False,
+      help='Disable python garbage collector. Increases perf on multi-gpu,'
+           ' but may cause CPU OOM issues.')
 
   def main(argv: Sequence[str]):
     """Wrapper for pdb post mortems."""
@@ -781,5 +785,7 @@ if __name__ == '__main__':
     train_using_gin()
     jax.effects_barrier()
 
+    if FLAGS.disable_gc:
+        trainer_lib.DISABLE_GC=True
 
   gin_utils.run(main)
