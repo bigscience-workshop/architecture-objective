@@ -59,6 +59,7 @@ setuptools.setup(
         't5',
         'tensorflow',
         'tensorstore >= 0.1.20',
+        'lm-eval',
     ],
     extras_require={
         'gcp': [

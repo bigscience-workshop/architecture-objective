@@ -27,6 +27,7 @@ import jax
 import jax.numpy as jnp
 import seqio
 from t5x import models
+from t5x import losses
 from t5x import partitioning
 from t5x import utils
 from t5x.infer import create_task_from_tfexample_file
@@ -36,9 +37,11 @@ from tensorflow.io import gfile
 from lm_eval.base import LM
 import numpy as np
 from lm_eval import evaluator, tasks
-from models import cross_entropy_with_logits
 from flax.training import common_utils
 
+import tensorflow as tf
+
+tf.config.experimental.set_visible_devices([], "GPU")
 
 # Automatically search for gin files relative to the T5X package.
 _DEFAULT_GIN_SEARCH_PATHS = [
@@ -176,7 +179,7 @@ def infer(*,
     logits = model._compute_logits(params, batch)  # type: jnp.ndarray
     target_tokens = batch['decoder_target_tokens']
     weights = batch['decoder_loss_weights']
-    token_scores = -cross_entropy_with_logits(
+    token_scores = -losses.cross_entropy_with_logits(
       logits,
       common_utils.onehot(
           target_tokens, logits.shape[-1], on_value=1, off_value=0),
@@ -374,7 +377,7 @@ if __name__ == '__main__':
     gin_utils.parse_gin_flags(
         # User-provided gin paths take precedence if relative paths conflict.
         FLAGS.gin_search_paths + _DEFAULT_GIN_SEARCH_PATHS,
-        FLAGS.gin_file_,
+        FLAGS.gin_file,
         FLAGS.gin_bindings)
 
     print(FLAGS.results_path)
