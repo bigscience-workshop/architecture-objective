@@ -1,0 +1,62 @@
+# Defaults for eval_harness.py.
+#
+# invoke like:
+#
+# python ${T5X_DIR}/t5x/eval_harness.py \
+#     --gin_search_paths=${PROJECT_DIR} \
+#     --gin_search_paths=${T5X_DIR} \
+#     --gin_file="t5x/examples/t5/t5_1_1/small.gin" \
+#     --gin_file="experiments/eval_harness.gin" \
+#     --gin.INFER_OUTPUT_DIR="'.'" \
+#     --gin.DROPOUT_RATE=0.0 \
+#     --gin.CHECKPOINT_PATH="'gs://t5-data/pretrained_models/t5.1.1.lm100k.small/model.ckpt-1100000'"\
+#     --results_path="..." \
+
+from __gin__ import dynamic_registration
+
+import __main__ as infer_script
+from t5x import partitioning
+from t5x import utils
+from t5x import models
+
+import seqio
+
+#include %MODEL_GIN
+
+# DEPRECATED: Import the this module in your gin file.
+MIXTURE_OR_TASK_MODULE = None
+TASK_FEATURE_LENGTHS = {"inputs": 512, "targets": 114}
+
+infer_script.infer:
+  model = %MODEL  # imported from separate gin file
+  dataset_cfg = @utils.DatasetConfig()
+  partitioner = @partitioning.PjitPartitioner()
+  restore_checkpoint_cfg = @utils.RestoreCheckpointConfig()
+  output_dir = %INFER_OUTPUT_DIR
+  checkpoint_period = 100
+  shard_id = 0
+  num_shards = 1
+
+infer_script.create_task_from_tuples:
+  vocab = %VOCABULARY
+
+partitioning.PjitPartitioner:
+  num_partitions = 1
+  logical_axis_rules = @partitioning.standard_logical_axis_rules()
+
+utils.DatasetConfig:
+  batch_size = 8
+  use_cached = True
+  pack = True
+  use_custom_packing_ops = False
+  seed = 42
+  shuffle = False
+  split = 'infer'
+  module = None
+  mixture_or_task_name = None
+  task_feature_lengths = %TASK_FEATURE_LENGTHS
+
+utils.RestoreCheckpointConfig:
+  path = %CHECKPOINT_PATH
+  mode = 'specific'
+  dtype = 'bfloat16'
