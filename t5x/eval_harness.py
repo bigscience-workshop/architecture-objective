@@ -56,7 +56,6 @@ DEFAULT_ACTIVE_TASKS = [
     "winogrande",
     "piqa",
     "mathqa",
-    "pubmedqa"
 ]
 
 def create_task_from_tuples(data, vocab):
