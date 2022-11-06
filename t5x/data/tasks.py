@@ -11,6 +11,8 @@ from flan import utils as flan_utils
 from flan import templates as flan_templates
 from flan import preprocessors as flan_preprocessors
 
+from t0.seqio_tasks import tasks as t0_tasks
+
 from t5.data import preprocessors
 
 TaskRegistry = seqio.TaskRegistry
