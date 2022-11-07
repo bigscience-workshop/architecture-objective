@@ -1,0 +1,33 @@
+# Register necessary SeqIO Tasks/Mixtures.
+from __gin__ import dynamic_registration
+import __main__ as train_script
+
+import seqio
+from t5x import utils
+
+include 't5x/examples/t5/t5_1_1/base.gin'
+include 't5x/configs/runs/finetune.gin'
+
+# import task module
+import t5x.data.tasks
+
+# MODEL_DIR = "gs://t5x-test/ckpts/benchmark/base_sglue_flan_regular"
+# INITIAL_CHECKPOINT_PATH = 
+# MIXTURE_OR_TASK_NAME = "t0_train"
+MIXTURE_OR_TASK_NAME = "trivia_qa_unfiltered_first_person_context"
+TASK_FEATURE_LENGTHS = {"inputs": 1024, "targets": 256}
+TRAIN_STEPS = 12500
+EVAL_PERIOD = 2500
+BATCH_SIZE = 32
+SEED = 42
+
+
+train/utils.DatasetConfig:
+  mixture_or_task_name = %MIXTURE_OR_TASK_NAME
+  task_feature_lengths = %TASK_FEATURE_LENGTHS
+  split = 'train'
+  batch_size = %BATCH_SIZE
+  seed = %SEED  # use a new seed each run/restart
+  use_cached = %USE_CACHED_TASKS
+  pack = True
+  module = %MIXTURE_OR_TASK_MODULE
