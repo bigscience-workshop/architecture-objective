@@ -24,6 +24,7 @@ popd
 
 git clone https://github.com/bigscience-workshop/architecture-objective.git
 pushd t5x
+git checkout thomas/test_loss_normalisation
 pip3 install -e .
 popd
 
